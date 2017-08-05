@@ -111,8 +111,10 @@ class User < ActiveRecord::Base
 
   def generate_score(other_user)
     time_correlation = self.featureVector(:schedule).inner_product other_user.featureVector(:schedule)
-    skill_correlation = self.featureVector(:skill_set).inner_product other_user.featureVector(:skill_set)
-    return time_correlation - skill_correlation
+    skill_correlation = 5 - (self.featureVector(:skill_set).inner_product other_user.featureVector(:skill_set))
+    #return time_correlation - skill_correlation
+    
+    return Vector[time_correlation, skill_correlation].r
   end
 
 end
