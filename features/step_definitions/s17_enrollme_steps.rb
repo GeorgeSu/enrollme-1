@@ -55,8 +55,11 @@ Then /I? clean the database/ do
   DatabaseCleaner.clean_with(:truncation, reset_ids: true, except: %w[options])
 end
 
-
-
+Then /I? toggle the checkbox with id "(.*)"/ do |id|
+  #page.find(id, :visible => false).trigger('click')
+  page.find("label[for=#{id}]").click
+  #page.find("label[for=#{id}]").click
+end
 ################ Team Listing Step Defs ####################
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.

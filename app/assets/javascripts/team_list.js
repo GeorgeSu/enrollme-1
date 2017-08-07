@@ -206,20 +206,24 @@ $(document).ready(function() {
         var label = $("label[for='"+$(this).attr('id')+"']");
         //Set the background colors on the page load
         if (elt.prop("checked") == false) {
-            label.css("background-color", "#2c3e50");
-            label.css("border-color", "#2c3e50");
+            label.css("background-color", "lightgray");
+            label.css("border-color", "lightgray");
+            label.css("color", "whitesmoke");
         } else if (elt.prop("checked") == true) {
             label.css("background-color", "#149c82");
             label.css("border-color", "#149c82");
+            label.css("color", "white");
         }
         //Bind an onclick handler to set background colors when clicking label
         label.click(function() {
             if (elt.prop("checked") == true) {
-                label.css("background-color", "#2c3e50");
-                label.css("border-color", "#2c3e50");
+                label.css("background-color", "lightgray");
+                label.css("border-color", "lightgray");
+                label.css("color", "whitesmoke");
             } else if (elt.prop("checked") == false) {
                 label.css("background-color", "#149c82");
                 label.css("border-color", "#149c82");
+                label.css("color", "white");
             }
         });
       

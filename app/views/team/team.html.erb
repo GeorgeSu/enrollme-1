@@ -50,7 +50,7 @@
           <br>
           <br>
           <h3>Team Discussion Information</h3>
-          <% disc = Discussion.find(@team.discussion_id) %>
+          <% disc = Discussion.find_by(id: @team.discussion_id) %>
           <h4><%= "CCN: #{disc.number} | Time: #{disc.day} #{disc.time}" %></h4>
       <% elsif @team.submitted %>
           <br>
@@ -118,7 +118,7 @@
       <br>
       <br>
       <h3>Team Discussion Information</h3>
-      <% disc = Discussion.find(@team.discussion_id) %>
+      <% disc = Discussion.find_by(id: @team.discussion_id) %>
       <h4><%= "CCN: #{disc.number}    Time: #{disc.day} #{disc.time}" %></h4>
   <% end %>
 </div>

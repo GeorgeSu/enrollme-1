@@ -19,10 +19,7 @@
   line-height: 1.42;
   border-radius: 15px;
   background-color: #149c82;
-}
-
-.btn-circle {
-    color: white;
+  color: white;
 }
 
 #waitlisted_form, #num_members_filter {
@@ -30,16 +27,20 @@
     display: inline;
 }
 
+.checkbox_and_label {
+    display: inline-block;
+}
+
 .checks {
-    //display: none;
+    display: block;
+    visibility: hidden;
     vertical-align: middle;
     margin: auto;
 }
 
-
 #teams {
     table-layout: fixed;
-    word-break: break-all;
+    word-break: break-word;
     width:100%;
 }
 
@@ -48,13 +49,20 @@ td:not(.member_names), th:not(.member_names){
 }
 
 .member_names {
-    width: 35%;
+    width: 40%;
+    min-width: 30%;
+    max-width: 50%;
+    
 }
 
 .requests {
     width: 10%;
+    min-width: 10%;
+    max-width: 20%;
 }
 
 .team_waitlisted {
     width: 15%;
+    min-width: 10%;
+    max-width: 20%;
 }
