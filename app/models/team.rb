@@ -1,3 +1,4 @@
+require 'matrix'
 class Team < ActiveRecord::Base
     has_many :users
     has_many :requests
@@ -157,6 +158,38 @@ class Team < ActiveRecord::Base
         skills = []
         self.users.each{|user| skills.push(user.getSkills)}
         return skills
+    end
+
+    def getMembersSkillsVectors
+        skills = []
+        self.users.each{|user| skills << user.featureVector(:skill_set)}
+        return skills
+    end
+
+    def getMembersScheduleVectors
+        schedules = []
+        self.users.each{|user| schedules << user.featureVector(:schedule)}
+        return schedules
+    end
+
+    def getTeamScheduleVector
+        teamScheduleVector = ::Vector[0,0,0,0,0,0,0]
+        self.users.each{|user| teamScheduleVector += user.featureVector(:schedule)}    
+        return teamScheduleVector
+    end
+
+    def getTeamSkillsVector
+        teamSkillsVector = ::Vector[0,0,0,0,0]
+        self.users.each{|user| teamSkillsVector += user.featureVector(:skill_set)}    
+        return teamSkillsVector
+    end
+
+    def getTeamCompatibility(other_team)
+        maxSize = [self.getNumMembers,other_team.getNumMembers].max
+        skillScore = (5*maxSize**2) - (self.getTeamSkillsVector.inner_product other_team.getTeamSkillsVector)
+        schedScore = self.getTeamScheduleVector.inner_product other_team.getTeamScheduleVector
+        finalScore = ::Vector[skillScore,schedScore].normalize.sum / 2
+        return finalScore
     end
 
     def getNumMembers # returns the number of members in this group
