@@ -2,8 +2,6 @@
   <h3>Team id:</h3>
   <%= @suggested_team.id %>
   <%= link_to "Next", next_rec_path, :class => "btn btn-primary", id: "next" %>
-</div>
-
   <h2>Recommended for you!</h2>
   <div id="myCarousel" class="carousel slide " data-ride="carousel">
 
@@ -13,16 +11,18 @@
         <div class = "container">
         <div class = "row row-centered">
           <div class = "col-sm-2 col-centered" >
-          <%= image_tag @users_pic_arr.pop(), class: "img-responsive img-rounded"  %>
-          <h5 class = "text-center" style = color:black;>Ken Chiu</h5>
+            <% pics = @suggested_team.members_pictures %>
+            <% names = @suggested_team.members_names %>
+          <%= image_tag pics.pop(), class: "img-responsive img-rounded"  %>
+          <h5 class = "text-center" style = color:black;> <%= names.pop() %></h5>
           </div>
           <div class = "col-sm-2 col-centered" >
-          <%= image_tag @users_pic_arr.pop(), class: "img-responsive img-rounded"  %>
-          <h5 class = "text-center" style = color:black;>Ken Chiu</h5>
+          <%= image_tag pics.pop(), class: "img-responsive img-rounded"  %>
+          <h5 class = "text-center" style = color:black;><%= names.pop() %></h5>
           </div>
           <div class = "col-sm-2 col-centered" >
-          <%= image_tag @users_pic_arr.pop(), class: "img-responsive img-rounded"  %>
-          <h5 class = "text-center" style = color:black;>Ken Chiu</h5>
+          <%= image_tag pics.pop(), class: "img-responsive img-rounded"  %>
+          <h5 class = "text-center" style = color:black;><%= names.pop() %></h5>
           </div>
         </div>
         </div>
@@ -57,3 +57,4 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+</div>

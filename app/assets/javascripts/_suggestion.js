@@ -16,7 +16,6 @@ Suggestion = {
     showDialog: function(data) {
         $('#suggestion').
         html(data);
-
         // return(false);  // prevent default link action
     },
 
