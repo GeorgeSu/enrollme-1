@@ -37,7 +37,8 @@ ActiveRecord::Schema.define(version: 20170804012953) do
   end
 
   create_table "requests", force: :cascade do |t|
-    t.integer "source_id"
+    t.integer "user_id"
+    t.string  "target_type"
     t.integer "target_id"
   end
 
@@ -108,6 +109,18 @@ ActiveRecord::Schema.define(version: 20170804012953) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "monday"
+    t.integer  "tuesday"
+    t.integer  "wednesday"
+    t.integer  "thursday"
+    t.integer  "friday"
+    t.integer  "saturday"
+    t.integer  "ruby_on_rails"
+    t.integer  "other_backend"
+    t.integer  "frontend"
+    t.integer  "ui_design"
+    t.integer  "team_management"
+    t.integer  "sunday"
     t.string   "document_file_name"
     t.string   "document_content_type"
     t.integer  "document_file_size"
