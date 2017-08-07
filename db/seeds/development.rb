@@ -33,8 +33,6 @@ Option.create!(
 User.delete_all
 Team.delete_all
 
-Discussion.create(number: 1, time: "4-5", capacity: 25, day: "Monday")
-
 users = [
   {:name => "George Su", :email => "gs@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 123456, :time_commitment=>20, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)},
   {:name => "Hadi Zhang", :email => "hz@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 1234567, :time_commitment=> 30, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 0, :team_management => 1, :frontend => 0, :ui_design => 1)},
@@ -80,7 +78,7 @@ for i in 0...users.length
     team2.users << current_user
     team2.update_waitlist
     current_user.team = team2
-  elsif i < 10
+  elsif i < 9
     team3.users << current_user
     team3.update_waitlist
     current_user.team = team3

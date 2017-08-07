@@ -10,7 +10,18 @@
     color: #18bc9c;
 }
 
-label {
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 15px;
+  background-color: #149c82;
+}
+
+.btn-circle {
     color: white;
 }
 
@@ -20,12 +31,30 @@ label {
 }
 
 .checks {
-    display: none;
+    //display: none;
     vertical-align: middle;
     margin: auto;
 }
 
-h5 {
-    display: inline;
-    padding: 8px;
+
+#teams {
+    table-layout: fixed;
+    word-break: break-all;
+    width:100%;
+}
+
+td:not(.member_names), th:not(.member_names){
+   text-align: center;
+}
+
+.member_names {
+    width: 35%;
+}
+
+.requests {
+    width: 10%;
+}
+
+.team_waitlisted {
+    width: 15%;
 }

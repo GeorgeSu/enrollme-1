@@ -202,16 +202,27 @@ $(document).ready(function() {
     });
     
     $(".checks").each(function() {
-        var elt = $(this).parent();
-        var elt_child =$(this);
-        elt_child.click(function() {
-            if (elt.css("background-color") == "rgb(44, 62, 80)") {
-                elt.css("background-color", "#149c82");
-                elt.css("border-color", "#149c82");
-            } else {
-                elt.css("background-color", "#2c3e50");
-                elt.css("border-color", "#2c3e50");
+        var elt = $(this);
+        var label = $("label[for='"+$(this).attr('id')+"']");
+        //Set the background colors on the page load
+        if (elt.prop("checked") == false) {
+            label.css("background-color", "#2c3e50");
+            label.css("border-color", "#2c3e50");
+        } else if (elt.prop("checked") == true) {
+            label.css("background-color", "#149c82");
+            label.css("border-color", "#149c82");
+        }
+        //Bind an onclick handler to set background colors when clicking label
+        label.click(function() {
+            if (elt.prop("checked") == true) {
+                label.css("background-color", "#2c3e50");
+                label.css("border-color", "#2c3e50");
+            } else if (elt.prop("checked") == false) {
+                label.css("background-color", "#149c82");
+                label.css("border-color", "#149c82");
             }
         });
-    });
+      
+    }); 
+    
 });

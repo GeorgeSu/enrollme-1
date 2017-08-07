@@ -90,6 +90,10 @@ class TeamController < ApplicationController
     @users_pic_arr = @suggested_team.members_pictures
     render :partial => 'suggestion', :object => @suggested_team and return if request.xhr?
     redirect_to team_list_path
+
+    # The code below is for suggestion
+      @recommended_team = Team.find_by_id(3)
+      @users_pic_arr = @recommended_team.members_pictures_thumb
   end
 
   def profile
