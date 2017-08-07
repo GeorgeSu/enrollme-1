@@ -58,9 +58,15 @@ class TeamController < ApplicationController
     sort = 'default'
     @waitlist_filter =['true', 'false']
     @num_members_filter = ['1', '2', '3', '4', '5', '6']
+    
     ordering = {:users_count => :desc}
+    
     @teams = Team.order(ordering)
     @suggested_team = Team.first
+
+    # The code below is for suggestion
+      @recommended_team = Team.find_by_id(3)
+      @users_pic_arr = @recommended_team.members_pictures_thumb
   end
 
 
@@ -98,8 +104,6 @@ class TeamController < ApplicationController
     #   @d3 = Discussion.find_by_id(@s.disc3id)
     # end
   end
-
-
   private
   
   def set_user
