@@ -4,10 +4,15 @@ class TeamController < ApplicationController
 
   
   before_filter :set_user, :set_team, :except => ['list', 'profile']
-  before_filter :set_permissions, :except => ['list', 'profile']
+  before_filter :set_permissions, :except => ['list', 'profile', 'next_rec']
   before_filter :check_approved, :only => ['submit', 'unsubmit', 'edit']
   
-  
+  # @@suggested_team = Team.first
+  # def self.suggested_team
+  #   @@suggested_team
+  # end
+
+
   def show
     @discussions = Discussion.valid_discs_for(@team)
     if @team.submitted and !(@team.approved)
@@ -53,10 +58,9 @@ class TeamController < ApplicationController
     sort = 'default'
     @waitlist_filter =['true', 'false']
     @num_members_filter = ['1', '2', '3', '4', '5', '6']
-    
     ordering = {:users_count => :desc}
-    
     @teams = Team.order(ordering)
+    @suggested_team = Team.first
   end
 
   def profile
@@ -82,6 +86,17 @@ class TeamController < ApplicationController
     #   @d3 = Discussion.find_by_id(@s.disc3id)
     # end
   end
+
+  def next_rec
+    # ajax call to render partial
+    @@suggested_team = Team.second
+    render :partial => 'suggestion', :object => @suggested_team and return if request.xhr?
+
+    #redirect_to team_list_path
+    # # calls admins#index
+    # redirect_to admins_path
+  end
+
   private
   
   def set_user
@@ -89,7 +104,7 @@ class TeamController < ApplicationController
       @user = Admin.find(session[:user_id])
     elsif session[:user_id]
       @user = User.find(session[:user_id])
-      redirect_to without_team_path, :notice => "Permission denied" if @user.team.nil?
+      redirect_to without_team_path, :notice => "Permission denied: you don't have a team" if @user.team.nil?
     else
       redirect_to '/', :notice => "Please log in"
     end
@@ -102,13 +117,11 @@ class TeamController < ApplicationController
   def set_permissions
     # checking that the team we are looking for exists and that the user doing the action on the team is either an admin or a student on the same team
     if @team.nil? or (session[:is_admin].nil? and @user.team != @team)
-      redirect_to '/', :notice => "Permission denied"
+      redirect_to '/', :notice => "Permission denied: no permission"
     end
   end
   
   def check_approved
-    redirect_to '/', :notice => "Permission denied" if @team.approved and !(@user.is_a? Admin)
+    redirect_to '/', :notice => "Permission denied: not approved" if @team.approved and !(@user.is_a? Admin)
   end
-
-
 end

@@ -33,6 +33,7 @@ Feature: Use an admin acccount to see organized team data
     Given I follow "Approved"
     Then I should see "Bob0"
     When I follow "disapprove_3"
+    Then show me the page
     And I follow "Approved"
     Then I should not see "Bob0"
 

@@ -87,6 +87,9 @@ class Team < ActiveRecord::Base
     # Summer '17 Code
     def method_missing(method_call)
         method_call.match(/members_(.*)s/)
+        if $1.nil?
+            raise "no such method"
+        end
         resource = $1.to_sym
         if @@direct_members.include? resource
             return self.users.map{|user| user.send(resource)}
