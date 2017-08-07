@@ -115,6 +115,6 @@ class User < ActiveRecord::Base
     skill_correlation = 5 - (self.featureVector(:skill_set).inner_product other_user.featureVector(:skill_set))
     #return time_correlation - skill_correlation
     
-    return Vector[time_correlation, skill_correlation].r
+    return Vector[time_correlation, skill_correlation].normalize.sum / 2
   end
 end
