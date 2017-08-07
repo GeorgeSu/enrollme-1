@@ -110,5 +110,14 @@ class TeamController < ApplicationController
     redirect_to '/', :notice => "Permission denied" if @team.approved and !(@user.is_a? Admin)
   end
 
+  def findCompatibleTeams
+    @team = Team.find_by_id(params[:id])
+    @other_teams = Team.where.not(id: params[:id])
+    teamScores = []
+    @other_teams.each { |otherTeam| teamScores << [otherTeam.id, @team.getTeamCompatibility(otherTeam)]}
+    return teamScores
+  end
+
+
 
 end

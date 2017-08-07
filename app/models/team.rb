@@ -192,6 +192,8 @@ class Team < ActiveRecord::Base
         return finalScore
     end
 
+
+
     def getNumMembers # returns the number of members in this group
         self.users.count
     end
@@ -223,4 +225,11 @@ class Team < ActiveRecord::Base
       self.save!
     end
 
+    def findCompatibleTeams
+        @team = Team.find_by_id(self.id)
+        @other_teams = Team.where.not(id: self.id)
+        teamScores = []
+        @other_teams.each { |otherTeam| teamScores << [otherTeam.id, @team.getTeamCompatibility(otherTeam)]}
+        return teamScores
+    end
 end
