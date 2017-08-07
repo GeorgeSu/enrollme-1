@@ -73,8 +73,8 @@ class TeamController < ApplicationController
     @users_name_arr = @suggested_team.members_names
 
     # The code below is for suggestion
-    # @recommended_team = Team.find_by_id(3)
-    # @users_pic_arr = @recommended_team.members_pictures_thumb
+    @recommended_team = Team.find_by_id(3)
+    @users_pic_arr = @recommended_team.members_pictures_thumb
   end
 
 
@@ -87,13 +87,12 @@ class TeamController < ApplicationController
     @user.recommendation_pointer = (@user.recommendation_pointer + 1) % matches.length
     @user.save
     @suggested_team = Team.find_by(id: match_team_id)
-    @users_pic_arr = @suggested_team.members_pictures
+    @users_pic_arr = @suggested_team.members_pictures_thumb
+    @users_name_arr = @suggested_team.members_names
     render :partial => 'suggestion', :object => @suggested_team and return if request.xhr?
     redirect_to team_list_path
 
     # The code below is for suggestion
-      @recommended_team = Team.find_by_id(3)
-      @users_pic_arr = @recommended_team.members_pictures_thumb
   end
 
   def profile
