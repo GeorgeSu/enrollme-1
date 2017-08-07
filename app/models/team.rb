@@ -160,8 +160,6 @@ class Team < ActiveRecord::Base
         return finalScore
     end
 
-
-
     def getNumMembers # returns the number of members in this group
         self.users.count
     end
@@ -199,5 +197,9 @@ class Team < ActiveRecord::Base
         teamScores = []
         @other_teams.each { |otherTeam| teamScores << [otherTeam.id, @team.getTeamCompatibility(otherTeam)]}
         return teamScores
+    end
+
+    def sortedMatches
+        return findCompatibleTeams.sort{|pair| pair[1]}.reverse
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804012953) do
+ActiveRecord::Schema.define(version: 20170807085859) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -37,8 +37,7 @@ ActiveRecord::Schema.define(version: 20170804012953) do
   end
 
   create_table "requests", force: :cascade do |t|
-    t.integer "user_id"
-    t.string  "target_type"
+    t.integer "source_id"
     t.integer "target_id"
   end
 
@@ -92,12 +91,12 @@ ActiveRecord::Schema.define(version: 20170804012953) do
   add_index "teams", ["discussion_id"], name: "index_teams_on_discussion_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                  null: false
-    t.string   "email",                 null: false
-    t.string   "major",                 null: false
-    t.string   "sid",                   null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "name",                               null: false
+    t.string   "email",                              null: false
+    t.string   "major",                              null: false
+    t.string   "sid",                                null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "team_id"
     t.string   "bio"
     t.integer  "time_commitment"
@@ -109,22 +108,11 @@ ActiveRecord::Schema.define(version: 20170804012953) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.integer  "monday"
-    t.integer  "tuesday"
-    t.integer  "wednesday"
-    t.integer  "thursday"
-    t.integer  "friday"
-    t.integer  "saturday"
-    t.integer  "ruby_on_rails"
-    t.integer  "other_backend"
-    t.integer  "frontend"
-    t.integer  "ui_design"
-    t.integer  "team_management"
-    t.integer  "sunday"
     t.string   "document_file_name"
     t.string   "document_content_type"
     t.integer  "document_file_size"
     t.datetime "document_updated_at"
+    t.integer  "recommendation_pointer", default: 0
   end
 
   add_index "users", ["team_id"], name: "index_users_on_team_id"

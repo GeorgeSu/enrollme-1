@@ -1,10 +1,3 @@
-$(document).ready(function(){
-    $('.carousel').carousel({
-      interval: false
-    })
-    $('#input-3').rating({displayOnly: true, step: 0.5});
-  });
-
 Suggestion = {
     setup: function() {
         $(document).on('click', '#next', Suggestion.getDialog)
@@ -24,7 +17,7 @@ Suggestion = {
         $('#suggestion').
         html(data);
 
-        return(false);  // prevent default link action
+        // return(false);  // prevent default link action
     },
 
 }
