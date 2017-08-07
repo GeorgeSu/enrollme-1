@@ -1,7 +1,5 @@
-<%= form_tag(next_rec_path, method: :get) do %>
+ <h3>Team id:</h3>
+ <%= @suggested_team.id %>
 
-    <h3>Team id:</h3>
-    <%= @suggested_team.id %>
 
-    <%= submit_tag "Next", :class => "btn btn-primary", id: "next" %>
-<% end %>
+ <%= link_to "Next", next_rec_path, :class => "btn btn-primary", id: "next" %>

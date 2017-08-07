@@ -63,6 +63,18 @@ class TeamController < ApplicationController
     @suggested_team = Team.first
   end
 
+
+  def next_rec
+    # ajax call to render partial
+    @suggested_team = Team.second
+    render :partial => 'suggestion', :object => @suggested_team and return if request.xhr?
+    # byebug
+    #redirect_to team_list_path
+    # # calls admins#index
+    # redirect_to admins_path
+  end
+
+
   def profile
     @team = Team.find_by_id(params[:id])
     @users_id = @team.users.map{|user| user.id}
@@ -87,15 +99,6 @@ class TeamController < ApplicationController
     # end
   end
 
-  def next_rec
-    # ajax call to render partial
-    @@suggested_team = Team.second
-    render :partial => 'suggestion', :object => @suggested_team and return if request.xhr?
-
-    #redirect_to team_list_path
-    # # calls admins#index
-    # redirect_to admins_path
-  end
 
   private
   

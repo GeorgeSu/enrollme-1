@@ -1,13 +1,13 @@
-suggestion = {
+Suggestion = {
     setup: function() {
-        $(document).on('click', '#next', Request.getDialog)
+        $(document).on('click', '#next', Suggestion.getDialog)
     },
 
     getDialog: function() {
         $.ajax({type: 'GET',
             url: $(this).attr('href'),
             timeout: 5000,
-            success: Request.showDialog,
+            success: Suggestion.showDialog,
             error: function(jqXHR, textStatus, errorThrown) { alert(jqXHR.textStatus); }
         });
         return(false);
@@ -21,4 +21,4 @@ suggestion = {
     },
 
 }
-$(Request.setup);
+$(Suggestion.setup);
