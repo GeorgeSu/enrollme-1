@@ -5,11 +5,26 @@
     text-decoration: underline;
     cursor: pointer;
 }
-
 #users_count_header:hover, #pending_requests_header:hover {
     color: #18bc9c;
 }
+#waitlisted_form, #num_members_filter {
+    margin-right: 20px;
+    display: inline;
+}
 
+
+
+
+.checkbox_and_label {
+    display: inline-block;
+}
+.checks {
+    display: block;
+    visibility: hidden;
+    vertical-align: middle;
+    margin: auto;
+}
 .btn-circle {
   width: 30px;
   height: 30px;
@@ -22,45 +37,26 @@
   color: white;
 }
 
-#waitlisted_form, #num_members_filter {
-    margin-right: 20px;
-    display: inline;
-}
 
-.checkbox_and_label {
-    display: inline-block;
-}
-
-.checks {
-    display: block;
-    visibility: hidden;
-    vertical-align: middle;
-    margin: auto;
-}
 
 #teams {
     table-layout: fixed;
     word-break: break-word;
     width:100%;
 }
-
 td:not(.member_names), th:not(.member_names){
    text-align: center;
 }
-
 .member_names {
-    width: 40%;
+    width: 35%;
     min-width: 30%;
     max-width: 50%;
-    
 }
-
 .requests {
-    width: 10%;
+    width: 15%;
     min-width: 10%;
     max-width: 20%;
 }
-
 .team_waitlisted {
     width: 15%;
     min-width: 10%;
