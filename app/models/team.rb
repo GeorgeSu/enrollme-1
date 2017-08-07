@@ -109,13 +109,6 @@ class Team < ActiveRecord::Base
         return pics
     end
     
-    def members_pictures_thumb
-        pics = []
-        self.users.each{|user| pics.push(user.avatar.url(:thumb))}
-        return pics
-    end
-    
-    
     def members_schedules
         days = []
         self.users.each{|user| days.push(user.getAvailableDays)}
