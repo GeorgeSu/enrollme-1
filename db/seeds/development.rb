@@ -8,7 +8,7 @@
 admins = [
     { :name => "EnrollMe", :email => "enrollmeberkeley@gmail.com", :superadmin => true},
     { :name => "Michael-David Sasson", :email => "sasson@berkeley.edu", :superadmin => false},
-    { :name => "George Su", :email => "georgesu1074@berkeley.edu", :superadmin => false},
+    { :name => "George Su", :email => "georgesu1074@gmail.com", :superadmin => false},
     { :name => "Derek Hsiao", :email => "hsiaoderek@berkeley.edu", :superadmin => false},
     { :name => "Karl Hayek", :email => "karlos9009@gmail.com", :superadmin => false},
         { :name => "Ken Chiu", :email => "kenchiu@berkeley.edu", :superadmin => false}
@@ -44,7 +44,7 @@ users = [
   {:name => "Aladdin", :email => "aladdin@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 19356, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 1, :team_management => 1, :frontend => 0, :ui_design => 1)},
   {:name => "Kalord", :email => "karlhayek97@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 9344456, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)}
   ]
-  
+
   team1 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
   team2 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
   team3 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
