@@ -36,7 +36,15 @@
       <hr class="custom_hr">
       <h5><span class="info_category">Experience:&nbsp;</span><%= @users_exp_arr.pop() %></h5>
       <hr class="custom_hr">
-      <h5><span class="info_category">Skills:&nbsp;</span><%= @users_skills_arr.pop() %></h5>
+      <h5><span class="info_category">Skills:&nbsp;</span></h5>
+      <% currentSkills =  @users_skills_arr.pop() %>
+      <button type="button" class="btn btn-success btn-xs">Ruby On Rails</button>
+      <button type="button" class="btn btn-info btn-xs">Ui Design</button>
+      <button type="button" class="btn btn-warning btn-xs">Frontend</button>
+      <button type="button" class="btn btn-primary btn-xs">Other Backend</button>
+      <button type="button" class="btn btn-danger btn-xs">Team Management</button>
+      
+      
       <hr class="custom_hr">
       <% currentFb =  @users_fb_arr.pop() %>
       <h5><span class="info_category">Facebook:&nbsp;</span><%=link_to "#{currentFb}",currentFb %></h5>
