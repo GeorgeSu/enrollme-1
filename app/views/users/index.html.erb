@@ -6,14 +6,9 @@
 		<h1>Users</h1>
 
 		<br>
-		<%= form_tag(users_path, :method => "get", id: "search_form", class: "input-group col-xs-5") do %>
-
-		  <%= text_field_tag :search, params[:search], placeholder: "Search for a User", class: "form-control input-sm", type: "search" %>
-
-		  <span class="input-group-btn">
-		    <%= submit_tag "Search", :id => 'search_button', class: "btn btn-primary btn-sm" %>
-		  </span>
-		<% end %>
+		<%= form_tag(team_list_path, :method => "get", id: "user_search_form", class: "input-group col-xs-5") do %>
+        	<%= text_field_tag :user_search, params[:search], placeholder: "Search for a User", class: "form-control input-sm", type: "search" %>
+     	<% end %>
 
 
 		<br><br>
