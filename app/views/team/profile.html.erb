@@ -21,19 +21,13 @@
       <h5>Time commitment: <%= @users_time_arr.pop() %>hrs/wk</h5>
       <h5>Available days:</h5>
             <% currentDays =  @users_days_arr.pop() %>
-        <% puts currentDays 
-        if currentDays.include? "Sunday"
-          puts "#$%^&*(*&^%$#"
-        end
-        %>
-        
       <label for="sunday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" if !currentDays.include? "Sunday"%>"><%= 'Sun' %></label>
-      <label for="monday" class="btn-circle" <%= style="background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Monday"%>><%= 'Mon' %></label>
-      <label for="tuesday" class="btn-circle" <%= style="background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Tuesday"%>><%= 'Tue' %></label>
-      <label for="wednesday" class="btn-circle" <%= style="background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Wednesday"%>><%= 'Wed' %></label>
-      <label for="thursday" class="btn-circle" <%= style="background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Thursday"%>><%= 'Thu' %></label>
-      <label for="friday" class="btn-circle" <%= style="background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Friday"%>><%= 'Fri' %></label>
-      <label for="saturday" class="btn-circle" <%= style="background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Saturday"%>><%= 'Sat' %></label>
+      <label for="monday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Monday"%>"><%= 'Mon' %></label>
+      <label for="tuesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Tuesday"%>"><%= 'Tue' %></label>
+      <label for="wednesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Wednesday"%>"><%= 'Wed' %></label>
+      <label for="thursday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Thursday"%>"><%= 'Thu' %></label>
+      <label for="friday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Friday"%>"><%= 'Fri' %></label>
+      <label for="saturday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Saturday"%>"><%= 'Sat' %></label>
 
       <h5><span class="info_category">Major:&nbsp;</span><%= @users_major_arr.pop() %></h5>
       <hr class="custom_hr">
