@@ -46,7 +46,7 @@ users = [
   {:name => "Kalord", :email => "karlhayek97@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 9344456, :time_commitment=>55}
   ]
 
-  team1 = Team.new(:passcode => Team.generate_hash, :approved => true, :submitted => false)
+  team1 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
   team2 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
   team3 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
 

@@ -3,21 +3,33 @@
     <div class="container">
         <h1>Student Information</h1>
         <br>
-        <h4>Name: <%= @user.name %> </h4>
+        <h4><span class="info_category">Name:&nbsp;</span><%= @user.name %> </h4>
         <%= image_tag @user.avatar.url(:medium) %>
-        <h4>Email: <%= @user.email %> </h4>
-        <h4>SID: <%= @user.sid %> </h4>
-        <h4>Major: <%= @user.major %> </h4>
-        <h4>On Waitlist?  <%= @user.waitlisted ? "Yes" : "No" %> </h4>
-        <h4>Team ID: <%= link_to @user.team_id, team_profile_path(@user.team_id) %> </h4>
-        <h4>Bio: <%= @user.bio.nil? ? "None" : @user.bio %></h4>
-        <h4>Time Commitment:  <%= @user.time_commitment.nil? ? "None" : @user.time_commitment %></h4>
-        <h4>Available Days: <%= @availableDays %></h4>
-        <h4>Experience:  <%= @user.experience.nil? ? "None" : @user.experience %></h4>
-        <h4>Skills: <%= @skills%></h4>
-        <h4>Facebook:  <%= @user.facebook.nil? ? "None" : @user.facebook %></h4>
-        <h4>Linkedin:  <%= @user.linkedin.nil? ? "None" : @user.linkedin %></h4>
-        <h4>Resume: <%= link_to "#{@user.document_file_name}", @user.document.url %> </h4>
+        <h4><span class="info_category">Email:&nbsp;</span><%= @user.email %> </h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">SID:&nbsp;</span><%= @user.sid %></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">Major:&nbsp;</span><%= @user.major %></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">On Waitlist?&nbsp;</span><%= @user.waitlisted ? "Yes" : "No" %></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">Team ID:&nbsp;</span><%= link_to @user.team_id, team_profile_path(@user.team_id) %></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">Bio:&nbsp;</span><%= @user.bio.nil? ? "None" : @user.bio %></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">Time Commitment:&nbsp;</span><%= @user.time_commitment.nil? ? "None" : @user.time_commitment %></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">Available Days:&nbsp;</span><%= @availableDays %></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">Experience:&nbsp;</span><%= @user.experience.nil? ? "None" : @user.experience %></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">Skills:&nbsp;</span><%= @skills%></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">Facebook:&nbsp;</span><%= @user.facebook.nil? ? "None" : @user.facebook %></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">Linkedin:&nbsp;</span><%= @user.linkedin.nil? ? "None" : @user.linkedin %></h4>
+        <hr class="custom_hr">
+        <h4><span class="info_category">Resume:&nbsp;</span><%= link_to "#{@user.document_file_name}", @user.document.url %></h4>
         <br>
         <%= link_to "Back", '#', onclick: "history.back()", class: 'btn btn-primary' %>
         <%= link_to "Edit", edit_user_path(params[:id]), {class: 'btn', :method => 'get'} %>

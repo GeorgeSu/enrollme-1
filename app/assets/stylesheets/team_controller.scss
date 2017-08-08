@@ -1,15 +1,32 @@
 // Place all the styles related to the TeamController controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/** Fake that table headers are links **/
 #users_count_header, #pending_requests_header {
     text-decoration: underline;
     cursor: pointer;
 }
-
 #users_count_header:hover, #pending_requests_header:hover {
     color: #18bc9c;
 }
+#waitlisted_form, #num_members_filter {
+    margin-right: 20px;
+    display: inline;
+}
 
+
+
+/** Fancy checkboxes */
+.checkbox_and_label {
+    display: inline-block;
+}
+.checks {
+    display: block;
+    visibility: hidden;
+    vertical-align: middle;
+    margin: auto;
+}
 .btn-circle {
   width: 30px;
   height: 30px;
@@ -19,42 +36,64 @@
   line-height: 1.42;
   border-radius: 15px;
   background-color: #149c82;
+  color: white;
 }
-
-.btn-circle {
-    color: white;
-}
-
-#waitlisted_form, #num_members_filter {
-    margin-right: 20px;
-    display: inline;
-}
-
-.checks {
-    //display: none;
-    vertical-align: middle;
-    margin: auto;
+.info_category.info_span {
+    display: inline-block;
 }
 
 
+
+/** Table layout */
 #teams {
     table-layout: fixed;
-    word-break: break-all;
+    word-break: break-word;
     width:100%;
 }
-
-td:not(.member_names), th:not(.member_names){
+#my_team {
+    table-layout: auto;
+    word-break: break-word;
+    width: auto;
+    min-width: 80%;
+}
+#teams> thead> tr> th:not(.member_names), #teams> tbody> tr> td:not(.member_names){
    text-align: center;
 }
-
 .member_names {
     width: 35%;
+    min-width: 30%;
+    max-width: 50%;
 }
-
 .requests {
-    width: 10%;
+    width: 15%;
+    min-width: 10%;
+    max-width: 20%;
 }
-
 .team_waitlisted {
     width: 15%;
+    min-width: 10%;
+    max-width: 20%;
+}
+
+
+/**Display buttons **/
+.row> form.button_to {
+    display: inline-block;
+    float: left
+}
+#disc_btn {
+    float: right;
+    margin-left: 20px;
+    padding-left: 10px;
+}
+
+
+/** Team Profile **/
+.custom_hr {
+    border-top: 1px solid #lightgray;
+}
+
+.info_category {
+    font-weight: bold;
+    color: #2e5767;
 }
