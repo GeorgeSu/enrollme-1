@@ -23,13 +23,7 @@ class TeamController < ApplicationController
     end
     render "team"
   end
-  
-  def submit
-    EmailStudents.successfully_submitted_email(@team).deliver_now
-    AdminMailer.send_look_at_submission
-    
-    redirect_to new_submission_path
-  end
+
   
   def unsubmit
     @submission = @team.submission

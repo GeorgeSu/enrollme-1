@@ -40,6 +40,7 @@ users = [
   {:name => "Carina Boo", :email => "cb@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 1238556, :time_commitment=>20},
   {:name => "Oski Bear", :email => "ob@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 123446, :time_commitment=>100},
   {:name => "Aladdin", :email => "aladdin@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 193456, :time_commitment=>55},
+  {:name => "Kalord", :email => "karlhayek97@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 9344456, :time_commitment=>55},
 ]
   
 team1 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
@@ -76,7 +77,7 @@ for i in 0...users.length
     team2.update_waitlist
     current_user.team = team2
     counter += 1
-  elsif i < 9
+  else 
     team3.users << current_user
     team3.update_waitlist
     current_user.team = team3

@@ -91,7 +91,7 @@
       <% end %>
       <% if @team.eligible? %>
         <div class="col-xs-2">
-          <%= form_tag submit_team_path(@team) do %>
+          <%= form_tag new_submission_path, method: "get" do %>
               <%= submit_tag "Submit team", class: "btn btn-primary" %>
           <% end %>
         </div>
