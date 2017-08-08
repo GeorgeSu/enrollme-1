@@ -50,7 +50,7 @@
       <table id="teams" class="table table-striped table-hover table-responsive">
         <thead>
           <tr>
-            <th class="member_names">Group Members</th>
+            <th class="member_names" style="width:40%" >Group Members</th>
             <th id="users_count_header">Members<span id="users_count_arrow">&#x25BC</span></th>
             <th id="pending_requests_header">Pending Requests<span id="pending_requests_arrow">&#x25BC</span></th>
             <th class="team_waitlisted">All Waitlisted?</th>
@@ -66,11 +66,11 @@
                 <td class="member_names">
                   <strong><%= link_to "#{team.getMembers}",team_profile_path(team.id) %></strong>
                   <br>
-      <button type="button" class="btn btn-success btn-xs" style="font-size : 10px;">Ruby On Rails</button> 
-      <button type="button" class="btn btn-info btn-xs">Ui Design</button>
-      <button type="button" class="btn btn-warning btn-xs">Frontend</button>
-      <button type="button" class="btn btn-primary btn-xs">Other Backend</button>
-      <button type="button" class="btn btn-danger btn-xs">Team Management</button>
+                  <button type="button" class="btn btn-success btn-xs" style="font-size : 10px;">Ruby On Rails</button> 
+                  <button type="button" class="btn btn-info btn-xs">Ui Design</button>
+                  <button type="button" class="btn btn-warning btn-xs">Frontend</button>
+                  <button type="button" class="btn btn-primary btn-xs">Other Backend</button>
+                  <button type="button" class="btn btn-danger btn-xs">Team Management</button>
                 </td>
                 <td>
                   <%= team.getNumMembers %>
