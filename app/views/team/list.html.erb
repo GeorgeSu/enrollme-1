@@ -64,7 +64,13 @@
             <% @teams.each do |team| %>
               <tr>
                 <td class="member_names">
-                  <%= link_to "#{team.getMembers}",team_profile_path(team.id) %>
+                  <strong><%= link_to "#{team.getMembers}",team_profile_path(team.id) %></strong>
+                  <br>
+      <button type="button" class="btn btn-success btn-xs" style="font-size : 10px;">Ruby On Rails</button> 
+      <button type="button" class="btn btn-info btn-xs">Ui Design</button>
+      <button type="button" class="btn btn-warning btn-xs">Frontend</button>
+      <button type="button" class="btn btn-primary btn-xs">Other Backend</button>
+      <button type="button" class="btn btn-danger btn-xs">Team Management</button>
                 </td>
                 <td>
                   <%= team.getNumMembers %>
