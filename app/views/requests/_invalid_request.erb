@@ -1,7 +1,7 @@
 
 
-  <h5><%= @error_message %></h5>
-  <button type="button" class="btn btn-link" id="closeLink">Okay</button>
+  <h4 id="error_message"><%= @error_message %></h4><br />
+  <button type="button" class="btn btn-default" id="closeLink">Okay</button>
 
 
 
@@ -11,12 +11,34 @@
     position: fixed;
     margin: auto;
     background: white;
-    top: 23%;
-    left: 29%;
-    width: 42%;
-    border: 2px solid darkblue;
+    top: 50%;
+    left: 50%;
+    
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    
+    width: auto;
+    height: auto;
+    
+    
+    
+    border: 2px solid #07073c;
     padding: 19px;
     padding-top: 13px;
+    z-index: 100;
+  }
+  
+  #closeLink{
+    display: block;
+    position: relative;
+    margin: auto;
+    margin-top: 2%;
+ 
+  }
+  
+  #error_message {
     text-align: center;
   }
 

@@ -14,7 +14,7 @@
 
       <%= form_tag team_list_path, :method => :get, :id => 'waitlisted_form' do %>
         <%= hidden_field_tag :to_sort, false %>
-        All Waitlisted?
+        <span class="info_category info_span"><h5>All Waitlisted?&nbsp;</h5></span>
         <div class="checkbox_and_label"><label for="waitlisted_yes" class="btn-circle">Yes</label>
         <%= check_box_tag 'waitlisted[]', true, @waitlist_filter.include?('true'), :id => "waitlisted_yes", :class => "checks" %>
         </div>
@@ -25,7 +25,7 @@
 
       <%= form_tag team_list_path, :method => :get, :id => 'num_members_filter' do %>
         <%= hidden_field_tag :to_sort, false %>
-        Number of Members:
+        <span class="info_category info_span"><h5>Number of Members:&nbsp;</h5></span>
         <div class="checkbox_and_label"><label for="num_members_1" class="btn-circle"><%= '1' %></label>
         <%= check_box_tag 'num_members[]', 1, @num_members_filter.include?('1'), :id => "num_members_1", :class => "checks" %>
         </div>
