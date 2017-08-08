@@ -6,14 +6,28 @@
 /*  padding: 0;*/
 /*}*/
 
-/*.navbar-nav .navbar-nav>.active> a, */
-/*.navbar-nav .navbar-nav>.active> a:focus, */
-/*.navbar-nav .navbar-nav>.active> a:hover {*/
-/*  background: red;*/
-/*}*/
+.navbar-nav .navbar-nav>.active> a, 
+.navbar-nav .navbar-nav>.active> a:focus, 
+.navbar-nav .navbar-nav>.active> a:hover {
+  background: red;
+}
 
+.nav
 .active{
 font-weight: bold;
-color: red;
-  /*border-bottom: 4px solid blue;*/
+}
+
+/**Below lines added to fix responsive navbar errors, maybe comment out in future*/
+ul.nav.navbar-nav.navbar-right {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+button.navbar-toggle {
+    margin-bottom: 0 !important;
+}
+div.navbar-collapse {
+    padding-top: 0 !important;
+}
+li {
+    background-color: #18bc9c !important;
 }

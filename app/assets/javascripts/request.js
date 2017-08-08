@@ -1,7 +1,7 @@
 Request = {
     setup: function() {
         // add invisible 'div' to end of page:
-        $('<div id="dialog"></div>').
+        $('<div id="dialog" class="modal-dialog modal-lg"></div>').
             hide().
             appendTo($('body'));
         $(document).on('click', '.request', Request.getDialog)

@@ -46,7 +46,7 @@ users = [
   {:name => "Kalord", :email => "karlhayek97@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 9344456, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)}
   ]
 
-  team1 = Team.new(:passcode => Team.generate_hash, :approved => true, :submitted => false)
+  team1 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
   team2 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
   team3 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
 
