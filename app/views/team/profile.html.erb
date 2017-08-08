@@ -15,6 +15,7 @@
       <h3><%= link_to @users_name_arr.pop(), user_path(@users_id.pop()) %></h3>
 
       <%= image_tag @users_pic_arr.pop(), :class => "img-responsive" %>
+
       <h5><span class="info_category">Major:&nbsp;</span><%= @users_major_arr.pop() %></h5>
       <hr class="custom_hr">
       <h5><span class="info_category">On Waitlist?&nbsp;</span><%= @users_waitlist_arr.pop()? "Yes" : "No" %></h5>
@@ -23,7 +24,15 @@
       <hr class="custom_hr">
       <h5><span class="info_category">Time commitment:&nbsp;</span><%= @users_time_arr.pop() %>hrs/wk</h5>
       <hr class="custom_hr">
-      <h5><span class="info_category">Available days:&nbsp;</span><%= @users_days_arr.pop() %></h5>
+      <h5><span class="info_category">Available days:&nbsp;</span></h5>
+      <% currentDays =  @users_days_arr.pop() %>
+      <label for="sunday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" if !currentDays.include? "Sunday"%>"><%= 'Sun' %></label>
+      <label for="monday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Monday"%>"><%= 'Mon' %></label>
+      <label for="tuesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Tuesday"%>"><%= 'Tue' %></label>
+      <label for="wednesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Wednesday"%>"><%= 'Wed' %></label>
+      <label for="thursday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Thursday"%>"><%= 'Thu' %></label>
+      <label for="friday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Friday"%>"><%= 'Fri' %></label>
+      <label for="saturday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Saturday"%>"><%= 'Sat' %></label>
       <hr class="custom_hr">
       <h5><span class="info_category">Experience:&nbsp;</span><%= @users_exp_arr.pop() %></h5>
       <hr class="custom_hr">
