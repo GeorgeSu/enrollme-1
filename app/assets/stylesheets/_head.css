@@ -15,7 +15,6 @@
 .nav
 .active{
 font-weight: bold;
-border-bottom: 4px solid #428bca !important;
 }
 
 /**Below lines added to fix responsive navbar errors, maybe comment out in future*/
