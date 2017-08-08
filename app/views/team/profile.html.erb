@@ -8,10 +8,10 @@
   enumeration <= 3? row = 1 : row = 2
   for i in 1..row 
 %>
-  <div class = row>
+  <div class = "row equal">
     <% for j in 0..2 %>
     <% if enumeration > 0 %>
-    <div class = "col-md-4 col-sm-6 col-xs-12">
+    <div class = "col-md-4 card">
       <h3><%= link_to @users_name_arr.pop(), user_path(@users_id.pop()) %></h3>
 
       <%= image_tag @users_pic_arr.pop(), :class => "img-responsive" %>
@@ -62,6 +62,4 @@
     <% end %>
   </div>
   <% end %>
-  
-  
 </div>
