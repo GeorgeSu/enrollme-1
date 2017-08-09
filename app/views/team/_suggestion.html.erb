@@ -41,7 +41,7 @@
                   <input id="input-3" name="input-3" value="4" class="rating-loading">
                 <h5>This awesome student has a good match with your Available Days!!!!</h5>
                 <p><a class="btn btn-sm btn-primary" href="<%= team_profile_path(@suggested_team.id) %>">View Team</a>
-                <a class="btn btn-sm btn-primary" href="#">EnrollMe</a></p>
+                <a class="btn btn-sm btn-primary request" href="<%= new_user_request_path(user_id: session[:user_id], target_id: @suggested_team.id) %>">EnrollMe</a></p>
               </div>
               </div>
       </div>
