@@ -4,7 +4,7 @@
         <h1>Student Information</h1>
         <br>
         <h4><span class="info_category">Name:&nbsp;</span><%= @user.name %> </h4>
-        <%= image_tag @user.avatar.url(:medium) %>
+        <%= image_tag @user.avatar.url(:medium) , :class=>"img-rounded img-responsive"%>
         <h4><span class="info_category">Email:&nbsp;</span><%= @user.email %> </h4>
         <hr class="custom_hr">
         <h4><span class="info_category">SID:&nbsp;</span><%= @user.sid %></h4>
@@ -34,4 +34,5 @@
         <%= link_to "Back", '#', onclick: "history.back()", class: 'btn btn-primary' %>
         <%= link_to "Edit", edit_user_path(params[:id]), {class: 'btn', :method => 'get'} %>
     </div>
+    <embed width="600" height="450" src="<%= @user.document.url%>" type="application/pdf"></embed>
 </body>
