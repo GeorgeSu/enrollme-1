@@ -5,9 +5,9 @@
         <div class = "col-sm-4">
   
         <h1>Student Information</h1>
-        <h4><span class="info_category">Name:&nbsp;</span><%= @user.name %> </h4>
+        <h4><span class="info_category">Name:&nbsp;</span><strong><%= @user.name %> </strong></h4>
         <%= image_tag @user.avatar.url(:medium) , :class=>"img-rounded img-responsive"%>
-        <h4><span class="info_category">Email:&nbsp;</span><%= @user.email %> </h4>
+        <h4><span class="info_category"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i>&nbsp;</span><a href="mailto:<%= @user.email %>"><%= @user.email %></a> </h4>
         <hr class="custom_hr">
         <h4><span class="info_category">SID:&nbsp;</span><%= @user.sid %></h4>
         <hr class="custom_hr">
@@ -27,14 +27,14 @@
         <hr class="custom_hr">
         <h4><span class="info_category">Skills:&nbsp;</span><%= @skills%></h4>
         <hr class="custom_hr">
-        <h4><span class="info_category">Facebook:&nbsp;</span><%= @user.facebook.nil? ? "None" : @user.facebook %></h4>
+        <h4><span class="info_category"><i class="fa fa-facebook-square fa-2x" aria-hidden="true" ></i>&nbsp;</span><a href="<%= @user.facebook %>" target = "_block"><%= @user.facebook %></a></h4>
         <hr class="custom_hr">
-        <h4><span class="info_category">Linkedin:&nbsp;</span><%= @user.linkedin.nil? ? "None" : @user.linkedin %></h4>
+        <h4><span class="info_category"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>&nbsp;</span><a href="<%= @user.linkedin %>" target = "_block"><%= @user.linkedin %></a></h4>
         <hr class="custom_hr">
-        <h4><span class="info_category">Resume:&nbsp;</span><%= link_to "#{@user.document_file_name}", @user.document.url %></h4>
+        <h4><span class="info_category">Resume:&nbsp;</span><%= link_to "#{@user.document_file_name}", @user.document.url ,:target => "_block" %></h4>
         <br>
         <%= link_to "Back", '#', onclick: "history.back()", class: 'btn btn-primary' %>
-        <%= link_to "Edit", edit_user_path(params[:id]), {class: 'btn', :method => 'get'} %>
+        <%= link_to "Edit", edit_user_path(params[:id]), {class: 'btn btn-primary', :method => 'get'} %>
     </div>
     <div class="col-sm-8">
       <br>
