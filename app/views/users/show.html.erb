@@ -32,7 +32,8 @@
         <h4><span class="info_category"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>&nbsp;</span><a href="<%= @user.linkedin %>" target = "_block"><%= @user.linkedin %></a></h4>
         <hr class="custom_hr">
         <h4><span class="info_category">Resume:&nbsp;</span><%= link_to "#{@user.document_file_name}", @user.document.url ,:target => "_block" %></h4>
-        <br>
+        <hr class="custom_hr">
+
         <%= link_to "Back", '#', onclick: "history.back()", class: 'btn btn-primary' %>
         <%= link_to "Edit", edit_user_path(params[:id]), {class: 'btn btn-primary', :method => 'get'} %>
     </div>
