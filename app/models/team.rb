@@ -153,11 +153,14 @@ class Team < ActiveRecord::Base
     end
 
     def getTeamCompatibility(other_team)
+=begin
         maxSize = [self.getNumMembers,other_team.getNumMembers].max
         skillScore = (5*maxSize**2) - (self.getTeamSkillsVector.inner_product other_team.getTeamSkillsVector)
         schedScore = self.getTeamScheduleVector.inner_product other_team.getTeamScheduleVector
         finalScore = ::Vector[skillScore,schedScore].normalize.sum / 2
         return finalScore
+=end
+        return 3
     end
 
     def getNumMembers # returns the number of members in this group
@@ -194,12 +197,14 @@ class Team < ActiveRecord::Base
     def findCompatibleTeams
         @team = Team.find_by_id(self.id)
         @other_teams = Team.where.not(id: self.id)
-        teamScores = []
-        @other_teams.each { |otherTeam| teamScores << [otherTeam.id, @team.getTeamCompatibility(otherTeam)]}
+        teamScores = {}
+        @other_teams.each do |otherTeam| 
+            teamScores[otherTeam.id] = @team.getTeamCompatibility(otherTeam)
+        end
         return teamScores
     end
 
     def sortedMatches
-        return findCompatibleTeams.sort{|pair| pair[1]}.reverse
+        return self.findCompatibleTeams.sort_by {|id, rating| rating}
     end
 end

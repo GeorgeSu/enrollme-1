@@ -4,7 +4,7 @@ class TeamController < ApplicationController
 
   
   before_filter :set_user, :set_team, :except => ['list', 'profile']
-  before_filter :set_permissions, :except => ['list', 'profile', 'next_rec']
+  before_filter :set_permissions, :except => ['list', 'profile', 'next_rec', 'prev_rec']
   before_filter :check_approved, :only => ['submit', 'unsubmit', 'edit']
   
   # @@suggested_team = Team.first
@@ -61,38 +61,43 @@ class TeamController < ApplicationController
     
     ordering = {:users_count => :desc}
     @teams = Team.order(ordering)
-
-    @user = User.find_by(id: session[:user_id])
-    @team = @user.team
-    matches = @team.sortedMatches
-    match_team_id = matches[@user.recommendation_pointer][0]
-    @user.recommendation_pointer = (@user.recommendation_pointer + 1) % matches.length
-    @user.save
-    @suggested_team = Team.find_by(id: match_team_id)
+    @suggested_team = get_rec(0)
     @users_pic_arr = @suggested_team.members_pictures
     @users_name_arr = @suggested_team.members_names
-
+=begin
     # The code below is for suggestion
     @recommended_team = Team.find_by_id(3)
     @users_pic_arr = @recommended_team.members_pictures_thumb
+=end
   end
 
-
   def next_rec
-    # ajax call to render partial
-    @user = User.find_by(id: session[:user_id])
-    @team = @user.team
-    matches = @team.sortedMatches
-    match_team_id = matches[@user.recommendation_pointer][0]
-    @user.recommendation_pointer = (@user.recommendation_pointer + 1) % matches.length
-    @user.save
-    @suggested_team = Team.find_by(id: match_team_id)
-    @users_pic_arr = @suggested_team.members_pictures_thumb
+    @suggested_team = get_rec(1)
+    @users_pic_arr = @suggested_team.members_pictures
     @users_name_arr = @suggested_team.members_names
+    # ajax call to render partial
     render :partial => 'suggestion', :object => @suggested_team and return if request.xhr?
     redirect_to team_list_path
-
-    # The code below is for suggestion
+  end
+  
+  def prev_rec
+    @suggested_team = get_rec(-1)
+    @users_pic_arr = @suggested_team.members_pictures
+    @users_name_arr = @suggested_team.members_names
+    # ajax call to render partial
+    render :partial => 'suggestion', :object => @suggested_team and return if request.xhr?
+    redirect_to team_list_path
+  end
+  
+  def get_rec(direction)
+    @user = User.find_by(id: session[:user_id])
+    @team = @user.team
+    #Get sorted matches, iterate through using pointer, and save pointer
+    matches = @team.sortedMatches
+    @user[:recommendation_pointer] = (@user[:recommendation_pointer] + direction) % matches.length
+    match_team_id = matches[@user[:recommendation_pointer]][0]
+    @user.save
+    return Team.find_by(id: match_team_id)
   end
 
   def profile
