@@ -35,7 +35,12 @@
         <hr class="custom_hr">
         <h4><span class="info_category">Experience:&nbsp;</span><%= @user.experience.nil? ? "None" : @user.experience %></h4>
         <hr class="custom_hr">
-        <h4><span class="info_category">Skills:&nbsp;</span><%= @skills%></h4>
+        <h4><span class="info_category">Skills:&nbsp;</span></h4>
+      <% if @skills.include? "Ruby" %> <button type="button" class="btn btn-success btn-xs">Ruby On Rails</button> <% end %>
+      <% if @skills.include? "Design" %><button type="button" class="btn btn-info btn-xs">Ui Design</button><% end %>
+      <% if @skills.include? "Frontend" %><button type="button" class="btn btn-warning btn-xs">Frontend</button><% end %>
+      <% if @skills.include? "Backend" %><button type="button" class="btn btn-primary btn-xs">Other Backend</button><% end %>
+      <% if @skills.include? "Management" %><button type="button" class="btn btn-danger btn-xs">Team Management</button><% end %>
         <hr class="custom_hr">
         <h4><span class="info_category"><i class="fa fa-facebook-square fa-2x" aria-hidden="true" ></i>&nbsp;</span><a href="<%= @user.facebook %>" target = "_block"><%= @user.facebook %></a></h4>
         <hr class="custom_hr">
