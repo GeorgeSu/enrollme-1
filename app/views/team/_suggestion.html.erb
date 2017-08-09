@@ -15,7 +15,7 @@
           <% enumeration = @suggested_team.users.count %>
           <% while enumeration > 0 %>
             <div class = "col-sm-2 col-centered" >
-            <%= image_tag @users_pic_arr.pop(), class: "img-responsive img-rounded"  %>
+            <%= image_tag @users_pic_arr.pop(), class: "img-responsive img-circle"  %>
             <h5 class = "text-center" style = color:black;><%= @users_name_arr.pop() %></h5>
             </div>
             <% enumeration -= 1 %>
