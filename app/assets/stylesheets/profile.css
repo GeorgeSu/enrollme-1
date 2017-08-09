@@ -18,6 +18,17 @@
   font-family: arial;
 }
 
+.card > .img-responsive{
+        position: relative;
+        left: 5%;
+}
+
+.card > .fa{
+      text-align: center;
+
+    margin: 5px;
+}
+
 /*.card > .container {*/
 /*  padding: 0 16px;*/
 /*}*/
@@ -52,6 +63,6 @@
 /*  color: black;*/
 /*}*/
 
-/*.card > button:hover, .card > a:hover {*/
+/*.card > .fa, .card > a:hover {*/
 /*  opacity: 0.7;*/
 /*}*/

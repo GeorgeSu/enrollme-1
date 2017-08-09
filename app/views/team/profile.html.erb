@@ -45,16 +45,20 @@
       <% if currentSkills.include? "Backend" %><button type="button" class="btn btn-primary btn-xs">Other Backend</button><% end %>
       <% if currentSkills.include? "Management" %><button type="button" class="btn btn-danger btn-xs">Team Management</button><% end %>
       
-      
       <hr class="custom_hr">
       <% currentFb =  @users_fb_arr.pop() %>
       <h5><span class="info_category">Facebook:&nbsp;</span><%=link_to "#{currentFb}",currentFb %></h5>
+
+      <a href="#"><i class="fa fa-facebook-square fa-2x" aria-hidden="true" ></i></a>
+      <a href="#"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a> 
+
       <hr class="custom_hr">
       <% currentLk =  @users_lk_arr.pop() %>
       <h5><span class="info_category">Linkedin:&nbsp;</span><%=link_to "#{currentLk}",currentLk %></h5>
       <hr class="custom_hr">
       <% currentEmail =  @users_email_arr.pop() %>
       <h5><span class="info_category">Email:&nbsp;</span><a href="mailto:<%= currentEmail %>"><%= currentEmail %></a></h5>
+            <a href="mailto:<%= currentEmail %>"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a> 
       <hr class="custom_hr">
     </div>
     <% enumeration-= 1 
