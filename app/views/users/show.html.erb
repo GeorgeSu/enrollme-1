@@ -35,7 +35,9 @@
         <hr class="custom_hr">
 
         <%= link_to "Back", '#', onclick: "history.back()", class: 'btn btn-primary' %>
-        <%= link_to "Edit", edit_user_path(params[:id]), {class: 'btn btn-primary', :method => 'get'} %>
+        <% if @user.id == session[:user_id] %>
+          <%= link_to "Edit", edit_user_path(params[:id]), {class: 'btn btn-primary', :method => 'get'} %>
+        <% end %>
     </div>
     <div class="col-sm-8">
       <br>
