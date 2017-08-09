@@ -52,13 +52,13 @@ Given(/^the team with passcode "([^"]*)" is submitted with discussion numbers "(
   Team.find_by_passcode(passcode).add_submission(s.id)
 end
 
-And /^the team with passcode "([^"]*)" is( not)? submitted$/ do | passcode, negate |
-  if negate
-    Team.find_by_passcode(passcode).update(:submitted => false)
-  else
-    Submission.create!(:disc1id => 1, :disc2id => 1, :disc3id => 1)
-    Team.find_by_passcode(passcode).add_submission(1)
-  end
+And /^the team with passcode "(.*)" is submitted$/ do |passcode|
+  s = Submission.create(:disc1id => 1, :disc2id => 2, :disc3id => 3)
+  Team.find_by(passcode: passcode).add_submission(1)
+end
+
+And /^the team with passcode "(.*)" is (not)? submitted$/ do | passcode, negate |
+  Team.find_by(passcode: passcode).update(:submitted => false)
 end
 
 And /^the team with passcode "([^"]*)" is not approved$/ do | passcode |

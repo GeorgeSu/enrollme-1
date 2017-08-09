@@ -5,7 +5,7 @@ Feature: admin can view more information about teams
   I want to click on team IDs and User names to check out their information
   
   Background:
-    Given the following users exist
+    Given these users exist
      | name  |       email                    |team_passcode | major           | sid  | waitlisted |
      | Sahai | eecs666@hotmail.com            | penguindrool | EECS            | 000  | Yes |
      | Saha2 | eecs667@hotmail.com            | penguindrool | EECS            | 001  | Yes |

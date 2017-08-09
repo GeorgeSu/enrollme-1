@@ -74,8 +74,8 @@ class Team < ActiveRecord::Base
 
     def add_submission(id)
         self.update(submitted: true)
-        self.submission_id = id
-        self.save!
+        self.update(submission_id: id)
+        self.save
     end
 
     def can_join?
