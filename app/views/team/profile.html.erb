@@ -14,7 +14,7 @@
     <div class = "col-md-4 card">
       <h3><%= link_to @users_name_arr.pop(), user_path(@users_id.pop()) %></h3>
 
-      <%= image_tag @users_pic_arr.pop(), :class => "img-responsive" %>
+      <%= image_tag @users_pic_arr.pop(), :class => "img-responsive img-rounded" %>
 
       <h5><span class="info_category">Major:&nbsp;</span><%= @users_major_arr.pop() %></h5>
       <hr class="custom_hr">
