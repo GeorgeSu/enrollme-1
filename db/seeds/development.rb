@@ -6,19 +6,24 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 admins = [
-    { :name => "EnrollMe", :email => "enrollmeberkeley@gmail.com", :superadmin => true},
-    { :name => "Michael-David Sasson", :email => "sasson@berkeley.edu", :superadmin => false},
-    { :name => "George Su", :email => "georgesu1074@gmail.com", :superadmin => false},
-    { :name => "Derek Hsiao", :email => "hsiaoderek@berkeley.edu", :superadmin => false},
-    { :name => "Karl Hayek", :email => "karlos9009@gmail.com", :superadmin => false},
-        { :name => "Ken Chiu", :email => "kenchiu@berkeley.edu", :superadmin => false},
-        { :name => "Hadi Zhang", :email => "hadizhang@gmail.com", :superadmin => true}
-
+    { :name => "Karl Hayek", :email => "kch05@berkeley.edu", :superadmin => true},
 ]
 
 Admin.delete_all
 admins.each do |a|
   Admin.create!(a)
+end
+
+
+discussions = [
+  { :number => 10001, :time => "2:00pm-3:00pm", :capacity => 25, :submission_id => 1, :day => "Monday"},
+  { :number => 10002, :time => "5:00pm-6:00pm", :capacity => 25, :submission_id => 2, :day => "Wednesday"},
+  { :number => 10003, :time => "3:00pm-4:00pm", :capacity => 30, :submission_id => 3, :day => "Monday"}
+]
+
+Discussion.delete_all
+discussions.each do |d|
+  Discussion.create!(d)
 end
 
 
@@ -44,7 +49,7 @@ users = [
   {:name => "Oski Bear", :email => "ob@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 123446, :time_commitment=>100, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)},
   {:name => "Aladdin", :email => "aladdin@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 19356, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 1, :team_management => 1, :frontend => 0, :ui_design => 1)},
   {:name => "Kalord", :email => "karlhayek97@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 9344456, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)},
-  {:name => "Kalord", :email => "skorpionstpe@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 9344456, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)}}
+  {:name => "Kalord", :email => "skorpionstpe@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 94456, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)}
   ]
 
   team1 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
@@ -85,3 +90,5 @@ for i in 0...users.length
     current_user.team = team3
   end
 end
+
+
