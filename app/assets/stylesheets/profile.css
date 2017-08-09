@@ -2,6 +2,7 @@
 
 .btn-xs {
     margin: 1.5px;
+    cursor:default;
 }
 
 .equal {
