@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'session#create'
   get 'auth/failure', to: redirect('/')
 
+  get 'next_rec', to: 'team#next_rec'
+
   resources :admins
   get '/admin/approve_team', to: 'admins#approve'
   get '/admin/disapprove_team', to: 'admins#disapprove'
@@ -58,6 +60,7 @@ Rails.application.routes.draw do
   post 'requests/send_email_to_user', to: 'requests#send_email_to_user', as: "send_email_to_user"
   get '/requests/email_team', to: 'requests#email_team'
   root 'session#new'
+
 
   # TODO: something for route not found
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
