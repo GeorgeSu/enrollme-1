@@ -8,7 +8,7 @@
 /*  #matchDescribtion {*/
 /*    position: absolute;*/
 /*    left: auto;*/
-    /*width: 75%;*/
+/*    width: 75%;*/
 /*    height: 100%;*/
 /*    background-color: #428bca;*/
 /*    opacity: 0.8;*/
@@ -23,6 +23,11 @@
     left: auto;
     right: auto;
     color: black;
+    margin-top: -20;
+}
+
+ .btn-primary{
+    margin: 0 10 0 10;
 }
 
 /* centered columns styles */
@@ -39,6 +44,9 @@
 }
 
 .carousel {
+    border-style: solid;
+    border-width: 1px;
+    max-height: 360px;
     border-radius: 10px 10px 10px 10px;
     overflow: hidden;
 }
