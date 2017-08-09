@@ -55,6 +55,8 @@ class TeamController < ApplicationController
   end
   
   def list
+    @user = User.find_by(id: session[:user_id])
+    @team = @user.team
     sort = 'default'
     @waitlist_filter =['true', 'false']
     @num_members_filter = ['1', '2', '3', '4', '5', '6']

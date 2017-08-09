@@ -62,30 +62,32 @@
             <h4>There are no teams with the member <%= params[:search] %>. </h4>
           <% else %>
             <% @teams.each do |team| %>
-              <tr>
-                <td class="member_names">
-                  <strong><%= link_to "#{team.getMembers}",team_profile_path(team.id) %></strong>
-                  <br>
-                  <% team_skills = team.members_skill_sets.join(" ") %>
-      <% if team_skills.include? "Ruby" %> <button type="button" class="btn btn-success btn-xs" id="team_skills">Ruby On Rails</button> <% end %>
-      <% if team_skills.include? "Design" %><button type="button" class="btn btn-info btn-xs" id="team_skills">Ui Design</button><% end %>
-      <% if team_skills.include? "Frontend" %><button type="button" class="btn btn-warning btn-xs" id="team_skills">Frontend</button><% end %>
-      <% if team_skills.include? "Backend" %><button type="button" class="btn btn-primary btn-xs" id="team_skills">Other Backend</button><% end %>
-      <% if team_skills.include? "Management" %><button type="button" class="btn btn-danger btn-xs" id="team_skills">Team Management</button><% end %>
-                </td>
-                <td>
-                  <%= team.getNumMembers %>
-                </td>
-                <td>
+              <% if team.id != @team.id %>
+                <tr>
+                  <td class="member_names">
+                    <strong><%= link_to "#{team.getMembers}",team_profile_path(team.id) %></strong>
+                    <br>
+                    <% team_skills = team.members_skill_sets.join(" ") %>
+                    <% if team_skills.include? "Ruby" %> <button type="button" class="btn btn-success btn-xs" id="team_skills">Ruby On Rails</button> <% end %>
+                    <% if team_skills.include? "Design" %><button type="button" class="btn btn-info btn-xs" id="team_skills">Ui Design</button><% end %>
+                    <% if team_skills.include? "Frontend" %><button type="button" class="btn btn-warning btn-xs" id="team_skills">Frontend</button><% end %>
+                    <% if team_skills.include? "Backend" %><button type="button" class="btn btn-primary btn-xs" id="team_skills">Other Backend</button><% end %>
+                    <% if team_skills.include? "Management" %><button type="button" class="btn btn-danger btn-xs" id="team_skills">Team Management</button><% end %>
+                  </td>
+                  <td>
+                    <%= team.getNumMembers %>
+                  </td>
+                  <td>
                   <%= team.pending_requests %>
-                </td>
-                <td class="team_waitlisted">
+                  </td>
+                  <td class="team_waitlisted">
                   <%= team.waitlisted ? "Yes" : "No" %>
-                </td>
-                <td class="requests">
+                  </td>
+                  <td class="requests">
                   <%= link_to "Join Team", new_user_request_path(user_id: session[:user_id], target_id: team.id), class: "btn btn-primary btn-sm request" %>
-                </td>
-              </tr>
+                  </td>
+                </tr>
+              <% end %>
             <% end %>
           <% end %>
         </tbody>
