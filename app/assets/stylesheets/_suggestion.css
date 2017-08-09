@@ -5,24 +5,35 @@
   /*    margin: 0 0 0 5%;*/
   /*}*/
   
-/*  #matchDescribtion {*/
-/*    position: absolute;*/
-/*    left: auto;*/
+  .leftBlock {
+    position: relative;
+    left: 15%;
     /*width: 75%;*/
-/*    height: 100%;*/
-/*    background-color: #428bca;*/
-/*    opacity: 0.8;*/
-/*    bottom:0;*/
-/*    right:0;*/
-/*    color: white;*/
-/*}*/
+    /*height: 100%;*/
+    /*background-color: #428bca;*/
+    /*opacity: 0.8;*/
+    /*bottom:0;*/
+    /*right:0;*/
+    /*color: white;*/
+        margin-top: 5;
 
+}
+.rightBlock{
+    position: relative;
+        margin-top: -20;
+
+}
 
 .carousel-caption {
     position: relative;
     left: auto;
     right: auto;
     color: black;
+    margin-top: -20;
+}
+
+ .btn-primary{
+    margin: 0 10 0 10;
 }
 
 /* centered columns styles */
@@ -36,4 +47,12 @@
     text-align:left;
     /* inline-block space fix */
     margin-right:-4px;
+}
+
+.carousel {
+    border-style: solid;
+    border-width: 1px;
+    max-height: 390px;
+    border-radius: 10px 10px 10px 10px;
+    overflow: hidden;
 }

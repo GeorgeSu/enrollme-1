@@ -29,3 +29,4 @@ $(document).ready(function(){
     })
     $('#input-3').rating({displayOnly: true, step: 0.5});
   });
+      $('#input-3').rating({displayOnly: true, step: 0.5});
