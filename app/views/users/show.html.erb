@@ -21,7 +21,14 @@
         <hr class="custom_hr">
         <h4><span class="info_category">Time Commitment:&nbsp;</span><%= @user.time_commitment.nil? ? "None" : @user.time_commitment %></h4>
         <hr class="custom_hr">
-        <h4><span class="info_category">Available Days:&nbsp;</span><%= @availableDays %></h4>
+        <h4><span class="info_category">Available Days:&nbsp;</span></h4>
+      <label for="sunday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" if !@availableDays.include? "Sunday"%>"><%= 'Sun' %></label>
+      <label for="monday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Monday"%>"><%= 'Mon' %></label>
+      <label for="tuesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Tuesday"%>"><%= 'Tue' %></label>
+      <label for="wednesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Wednesday"%>"><%= 'Wed' %></label>
+      <label for="thursday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Thursday"%>"><%= 'Thu' %></label>
+      <label for="friday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Friday"%>"><%= 'Fri' %></label>
+      <label for="saturday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Saturday"%>"><%= 'Sat' %></label>
         <hr class="custom_hr">
         <h4><span class="info_category">Experience:&nbsp;</span><%= @user.experience.nil? ? "None" : @user.experience %></h4>
         <hr class="custom_hr">
