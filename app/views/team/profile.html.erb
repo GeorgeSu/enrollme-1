@@ -8,13 +8,13 @@
   enumeration <= 3? row = 1 : row = 2
   for i in 1..row 
 %>
-  <div class = row>
+  <div class = "row equal">
     <% for j in 0..2 %>
     <% if enumeration > 0 %>
-    <div class = "col-md-4 col-sm-6 col-xs-12">
+    <div class = "col-md-4 card">
       <h3><%= link_to @users_name_arr.pop(), user_path(@users_id.pop()) %></h3>
 
-      <%= image_tag @users_pic_arr.pop(), :class => "img-responsive" %>
+      <%= image_tag @users_pic_arr.pop(), :class => "img-responsive img-rounded" %>
 
       <h5><span class="info_category">Major:&nbsp;</span><%= @users_major_arr.pop() %></h5>
       <hr class="custom_hr">
@@ -45,16 +45,13 @@
       <% if currentSkills.include? "Backend" %><button type="button" class="btn btn-primary btn-xs">Other Backend</button><% end %>
       <% if currentSkills.include? "Management" %><button type="button" class="btn btn-danger btn-xs">Team Management</button><% end %>
       
-      
       <hr class="custom_hr">
       <% currentFb =  @users_fb_arr.pop() %>
-      <h5><span class="info_category">Facebook:&nbsp;</span><%=link_to "#{currentFb}",currentFb %></h5>
-      <hr class="custom_hr">
+      <% if !currentFb.to_s.empty? %> <a href="<%= currentFb %>" target="_black"><i class="fa fa-facebook-square fa-2x" aria-hidden="true" ></i></a><% end %>
       <% currentLk =  @users_lk_arr.pop() %>
-      <h5><span class="info_category">Linkedin:&nbsp;</span><%=link_to "#{currentLk}",currentLk %></h5>
-      <hr class="custom_hr">
+      <% if !currentLk.to_s.empty? %><a href="<%= currentLk %>" target = "_block"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a><% end %>
       <% currentEmail =  @users_email_arr.pop() %>
-      <h5><span class="info_category">Email:&nbsp;</span><a href="mailto:<%= currentEmail %>"><%= currentEmail %></a></h5>
+            <a href="mailto:<%= currentEmail %>"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a> 
       <hr class="custom_hr">
     </div>
     <% enumeration-= 1 
@@ -62,6 +59,4 @@
     <% end %>
   </div>
   <% end %>
-  
-  
 </div>
