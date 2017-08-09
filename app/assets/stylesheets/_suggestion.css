@@ -37,3 +37,8 @@
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+.carousel {
+    border-radius: 10px 10px 10px 10px;
+    overflow: hidden;
+}
