@@ -5,18 +5,24 @@
   /*    margin: 0 0 0 5%;*/
   /*}*/
   
-/*  #matchDescribtion {*/
-/*    position: absolute;*/
-/*    left: auto;*/
-/*    width: 75%;*/
-/*    height: 100%;*/
-/*    background-color: #428bca;*/
-/*    opacity: 0.8;*/
-/*    bottom:0;*/
-/*    right:0;*/
-/*    color: white;*/
-/*}*/
+  .leftBlock {
+    position: relative;
+    left: 15%;
+    /*width: 75%;*/
+    /*height: 100%;*/
+    /*background-color: #428bca;*/
+    /*opacity: 0.8;*/
+    /*bottom:0;*/
+    /*right:0;*/
+    /*color: white;*/
+        margin-top: 5;
 
+}
+.rightBlock{
+    position: relative;
+        margin-top: -20;
+
+}
 
 .carousel-caption {
     position: relative;
