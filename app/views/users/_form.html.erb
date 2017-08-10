@@ -35,8 +35,8 @@
       <% days = [ :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday] %>
         <div class="checkbox_container">
         <% days.each do |day| %>
-          <%= schedule_field.label day %>
-           <%= schedule_field.check_box day %>
+          <div class = "checkbox_and_label"><%= schedule_field.label day,day[0..2].capitalize,:class=>"btn-circle"%>
+           <%= schedule_field.check_box day , :class=>"checks"%></div>
         <% end %>
       </div>
   <% end %>
