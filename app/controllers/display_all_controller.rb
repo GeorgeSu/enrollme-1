@@ -1,3 +1,0 @@
-class DisplayAllController < ApplicationController
-
-end
