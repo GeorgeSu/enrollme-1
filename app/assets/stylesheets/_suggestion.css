@@ -71,7 +71,7 @@
 
 .stars-container:before {
   position: absolute;
-  top: 0;
+  top: -10;
   left: 0;
   content: '★★★★★';
   color: lightgray;
@@ -79,7 +79,7 @@
 
 .stars-container:after {
   position: absolute;
-  top: 0;
+  top: -10;
   left: 0;
   content: '★★★★★';
   color: gold;
