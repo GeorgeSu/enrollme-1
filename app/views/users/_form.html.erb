@@ -32,11 +32,11 @@
 <div class= "field form-group">
   <%= f.label :"Available days:", class: "col-lg-2 control-label"  %> <br>
   <%= f.fields_for :schedule, @user.schedule do |schedule_field| %>
-      <% days = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday] %>
-      <div class="checkbox_container">
+      <% days = [ :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday] %>
+        <div class="checkbox_container">
         <% days.each do |day| %>
-          <%= schedule_field.label day %>
-          <%= schedule_field.check_box day %>
+          <div class = "checkbox_and_label" id = "daysChecks"><%= schedule_field.label day,day[0..2].capitalize,:class=>"btn-circle"%>
+           <%= schedule_field.check_box day , :class=>"checks"%></div>
         <% end %>
       </div>
   <% end %>
@@ -45,10 +45,10 @@
 <div class= "field form-group">
   <%= f.label :"Skills:", class: "col-lg-2 control-label"  %> <br>
   <%= f.fields_for :skill_set, @user.skill_set do |skill_field| %>
-      <% skills = [:ruby_on_rails, :other_backend, :frontend, :ui_design, :team_management] %>
+      <% skills = {:ruby_on_rails => "btn btn-success btn-xs", :other_backend =>"btn btn-primary btn-xs", :frontend =>"btn btn-warning btn-xs", :ui_design =>"btn btn-info btn-xs", :team_management =>"btn btn-danger btn-xs"} %>
       <div class="checkbox_container">
-        <% skills.each do |skill| %>
-          <%= skill_field.label skill %>
+        <% skills.each do |skill,uiBtn| %>
+           <%= skill_field.label skill ,:class=>uiBtn%>
           <%= skill_field.check_box skill %>
         <% end %>
       </div>

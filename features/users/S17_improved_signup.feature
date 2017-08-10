@@ -24,11 +24,11 @@ Scenario: Add Facebook/linkedin
 	And I follow "My Info"
 	Then I should see "https://www.facebook.com/oski.bear.5"
 
-Scenario: Specify time commitment
-	Given I check the following fields: Monday
-	When I press "Sign Up"
-	And I follow "My Info"
-	Then I should see "Monday"
+# Scenario: Specify time commitment
+# 	Given I check the following fields: "user_schedule_monday"
+# 	When I press "Sign Up"
+# 	And I follow "My Info"
+# 	Then I should see "Mon"
 
 Scenario: Indicate skillset
 	Given I check the following fields: Ruby on rails,Frontend
