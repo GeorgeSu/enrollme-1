@@ -44,8 +44,18 @@ class Request < ActiveRecord::Base
       target.requests << req
       req.team = target
     end
+    #Make sure old requests to the source team are now using the new id
+    #Unless the old target was the current team, then don't do that
+    old1_requests = Request.where(target_id: source.id)
+    old1_requests.each do |req|
+      if req.source_id == target.id
+        target.requests.destroy(req)
+      else
+        req.target_id = target.id
+      end
+    end
     
-    #Delete the old team which the targets belonged to
+    #Delete the old team 
     source.destroy
   end
   
