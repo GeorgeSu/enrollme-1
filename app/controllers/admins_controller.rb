@@ -92,9 +92,11 @@ class AdminsController < ApplicationController
       Team.delete_all
       Submission.delete_all
       Discussion.delete_all
-      redirect_to "/", :success => "All data reset. Good luck with the new semester!"
+      flash[:success] = "All data reset. Good luck with the new semester!"
+      redirect_to "/"
     else
-      redirect_to reset_semester_path, :error => "Incorrect password"
+      flash[:error] = "Incorrect password"
+      redirect_to reset_semester_path
     end
   end
       
@@ -182,7 +184,8 @@ class AdminsController < ApplicationController
 
   def validate_admin
     if !(session[:is_admin])
-      redirect_to '/', :error => "Permission denied"
+      flash[:error] = "Permission denied"
+      redirect_to '/'
     end
   end
 

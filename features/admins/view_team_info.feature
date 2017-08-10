@@ -27,7 +27,6 @@ Feature: admin can view more information about teams
     And I follow "Pending"
 
   Scenario: An admin accesses a submitted team's page
-    Then save the page
   	Given I follow "1"
   	Then I should see "Team has been submitted!"
   	Then I should see "Selected Discussion Sections"

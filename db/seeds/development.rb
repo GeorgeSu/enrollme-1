@@ -1,3 +1,4 @@
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -6,7 +7,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 admins = [
-    { :name => "Karl Hayek", :email => "kch05@berkeley.edu", :superadmin => true},
+    { :name => "Karl Hayek", :email => "karlos9009@gmail.com", :superadmin => false}
+
 ]
 
 Admin.delete_all
@@ -36,6 +38,7 @@ Option.create!(
 User.delete_all
 Team.delete_all
 
+
 users = [
   {:name => "George Su", :email => "gs@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 123456, :time_commitment=>20, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)},
   {:name => "Hadi Zhang", :email => "hz@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 1234567, :time_commitment=> 30, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 0, :team_management => 1, :frontend => 0, :ui_design => 1)},
@@ -45,13 +48,13 @@ users = [
   {:name => "Karl Hayek", :email => "kh@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 123756, :time_commitment=>15, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 0, :team_management => 0, :frontend => 0, :ui_design => 1)},
   {:name => "Carina Boo", :email => "cb@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 1238556, :time_commitment=>20, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)},
   {:name => "Oski Bear", :email => "ob@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 123446, :time_commitment=>100, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)},
-  {:name => "Aladdin", :email => "aladdin@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 19356, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 1, :team_management => 1, :frontend => 0, :ui_design => 1)},
-  {:name => "Karlord", :email => "skorpionstpe@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 94456, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)}
-  ]
+  {:name => "Aladdin", :email => "aladdin@gmail.com", :major => 'DECLARED CS/EECS Major', :facebook =>"http://www.facebook.com" ,:linkedin =>"http://www.linkedin.com", :waitlisted => true, :sid => 19356, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 1, :team_management => 1, :frontend => 0, :ui_design => 1)},
+  {:name => "Kalord", :email => "skorpionstpe@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 9344456, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)}
+]
 
-  team1 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
-  team2 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
-  team3 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
+team1 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
+team2 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
+team3 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
 
 sample_schedule1 = {:monday => 0, :tuesday => 0, :wednesday =>0, :thursday => 0, :friday => 0, :saturday => 0, :sunday => 0}
 sample_schedule2 = {:monday => 1, :tuesday => 1, :wednesday =>1, :thursday => 1, :friday => 1, :saturday => 1, :sunday => 1}
@@ -87,5 +90,3 @@ for i in 0...users.length
     current_user.team = team3
   end
 end
-
-
