@@ -56,3 +56,9 @@
     border-radius: 10px 10px 10px 10px;
     overflow: hidden;
 }
+
+.fa-chevron-circle-left, .fa-chevron-circle-right {
+    position: relative;
+    top: 50%;
+    
+}
