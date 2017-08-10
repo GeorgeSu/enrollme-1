@@ -56,7 +56,7 @@ Feature: Manage requests for joining teams
     Then I should see "Request message"
     When I press "Send"
     And I follow "Requests"
-    And I press the "Cancel" button on the same row as "An"
+    And I press the "cancel" button on the same div as the team with passcode "passcode0"
     Then I should not see "An"
     
   @javascript
@@ -67,7 +67,7 @@ Feature: Manage requests for joining teams
     And I follow "Logout"
     And I log in as a user with email "bobjones0@berkeley.edu"
     And I follow "Requests"
-    And I press the "Accept Request" button on the same row as "Derek"
+    And I press the "accept" button on the same div as the team with passcode "passcode9"
     Then I should see "Request Approved"
     And I should not see "Derek"
     And I follow "Logout"
@@ -82,7 +82,7 @@ Feature: Manage requests for joining teams
     And I follow "Logout"
     And I log in as a user with email "bobjones0@berkeley.edu"
     And I follow "Requests"
-    And I press the "Deny Request" button on the same row as "Derek"
+    And I press the "deny" button on the same div as the team with passcode "passcode9"
     Then I should see "Request Denied"
     And I should not see "Derek"
     And I follow "Logout"
