@@ -16,7 +16,7 @@ Feature: admin edits discussion times
   Scenario: Admin successfully edits a discussion
     Given I am on the discussion_index page
     Then I should see "54321 Tuesday 3:00 PM 25"
-    When I press "Edit Discussions"
+    When I follow "Edit"
     And I select "CCN: 54321 | Time: Tuesday 3:00 PM | Enrolled: 0 / 25" from "edit_disc[edit_disc]"
     And I press "Submit"
     And I select "Monday" from "day"

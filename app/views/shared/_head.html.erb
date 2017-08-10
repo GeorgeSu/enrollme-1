@@ -1,6 +1,5 @@
 <%= stylesheet_link_tag :application %>
 
-<!DOCTYPE html>
 
 <nav id = "navBar" class="navbar navbar-inverse">
   <div class="container">
@@ -13,7 +12,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">EnrollMe</a>
-    </div>
+    </div>  
 
 
     <div class="navbar-collapse collapse" id="navbar-collapse-1">
@@ -46,8 +45,10 @@
 
 </nav>
 
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, class: "alert container" %>
+<% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %> container" id="flash">
+            <%= value %>
+      </div>
 <% end %>
 
 <head>
@@ -58,3 +59,11 @@
 </head>
 
 <%= yield %>
+
+
+<style>
+  #flash{
+    /*height: 20px;*/
+    
+  }
+</style>

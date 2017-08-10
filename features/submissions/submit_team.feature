@@ -46,11 +46,9 @@ Feature: student submits their team for approval
     And I select "CCN: 54322 | Time: Wednesday 3:00 PM | Enrolled: 0 / 25" from "submission[disc2id]"
     And I select "CCN: 54323 | Time: Thursday 3:00 PM | Enrolled: 0 / 25" from "submission[disc3id]"
     And I press "Submit"
-    Then I should see "Thanks for submitting your team for enrollment."
-    ############################################
-    And a confirmation email should be sent to the admin
+    Then I should see "Thanks for submitting your team for enrollment"
+    And a confirmation email should be sent to the admin containing the following team members: "Bob0, Bob1, Bob2, Bob3, Sahai"
     And a confirmation email should be sent to the following team members: "bobjones0@berkeley.edu, bobjones1@berkeley.edu, bobjones2@berkeley.edu, bobjones3@berkeley.edu, eecs666@hotmail.com"
-    ############################################
     And I should see "My Team"
     
 

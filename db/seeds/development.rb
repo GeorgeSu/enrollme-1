@@ -1,3 +1,4 @@
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -6,13 +7,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 admins = [
-    { :name => "EnrollMe", :email => "enrollmeberkeley@gmail.com", :superadmin => true},
-    { :name => "Michael-David Sasson", :email => "sasson@berkeley.edu", :superadmin => false},
-    { :name => "George Su", :email => "georgesu1074@gmail.com", :superadmin => false},
-    { :name => "Derek Hsiao", :email => "hsiaoderek@berkeley.edu", :superadmin => false},
-    { :name => "Karl Hayek", :email => "karlos9009@gmail.com", :superadmin => false},
-        { :name => "Ken Chiu", :email => "kenchiu@berkeley.edu", :superadmin => false},
-        { :name => "Hadi Zhang", :email => "hadizhang@gmail.com", :superadmin => true}
+    { :name => "Karl Hayek", :email => "karlos9009@gmail.com", :superadmin => false}
 
 ]
 
@@ -22,16 +17,27 @@ admins.each do |a|
 end
 
 
+discussions = [
+  { :number => 10001, :time => "2:00pm-3:00pm", :capacity => 25, :submission_id => 1, :day => "Monday"},
+  { :number => 10002, :time => "5:00pm-6:00pm", :capacity => 25, :submission_id => 2, :day => "Wednesday"},
+  { :number => 10003, :time => "3:00pm-4:00pm", :capacity => 30, :submission_id => 3, :day => "Monday"}
+]
+
+Discussion.delete_all
+discussions.each do |d|
+  Discussion.create!(d)
+end
+
+
 Option.delete_all
 Option.create!(
-  :minimum_team_size => 5,
+  :minimum_team_size => 5,  
   :maximum_team_size => 6
   )
-
-# Below is all of my Test Seeds - George
-
+  
 User.delete_all
 Team.delete_all
+
 
 users = [
   {:name => "George Su", :email => "gs@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 123456, :time_commitment=>20, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)},
@@ -43,12 +49,12 @@ users = [
   {:name => "Carina Boo", :email => "cb@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 1238556, :time_commitment=>20, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)},
   {:name => "Oski Bear", :email => "ob@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => true, :sid => 123446, :time_commitment=>100, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)},
   {:name => "Aladdin", :email => "aladdin@gmail.com", :major => 'DECLARED CS/EECS Major', :facebook =>"http://www.facebook.com" ,:linkedin =>"http://www.linkedin.com", :waitlisted => true, :sid => 19356, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 0, :other_backend => 1, :team_management => 1, :frontend => 0, :ui_design => 1)},
-  {:name => "Kalord", :email => "karlhayek97@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 9344456, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)}
-  ]
+  {:name => "Kalord", :email => "skorpionstpe@gmail.com", :major => 'DECLARED CS/EECS Major', :waitlisted => false, :sid => 9344456, :time_commitment=>55, :skill_set => SkillSet.create(:ruby_on_rails => 1, :other_backend => 1, :team_management => 1, :frontend => 1, :ui_design => 1)}
+]
 
-  team1 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
-  team2 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
-  team3 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
+team1 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
+team2 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
+team3 = Team.new(:passcode => Team.generate_hash, :approved => false, :submitted => false)
 
 sample_schedule1 = {:monday => 0, :tuesday => 0, :wednesday =>0, :thursday => 0, :friday => 0, :saturday => 0, :sunday => 0}
 sample_schedule2 = {:monday => 1, :tuesday => 1, :wednesday =>1, :thursday => 1, :friday => 1, :saturday => 1, :sunday => 1}
@@ -78,7 +84,7 @@ for i in 0...users.length
     team2.users << current_user
     team2.update_waitlist
     current_user.team = team2
-  elsif i < 9
+  else
     team3.users << current_user
     team3.update_waitlist
     current_user.team = team3

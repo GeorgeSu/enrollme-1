@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/login_admin', to: 'session#login_admin'
 
   resources :team
-  post 'team/:id/submit', to: 'team#submit', as: "submit_team"
+  # post 'team/:id/submit', to: 'team#submit', as: "submit_team"
   post 'team/:id/unsubmit', to: 'team#unsubmit', as: "unsubmit_team"
   get 'teamlist', to: 'team#list', as: "team_list"
   get 'team/:id/profile', to: 'team#profile', as: 'team_profile'

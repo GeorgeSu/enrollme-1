@@ -13,9 +13,9 @@ class AdminsController < ApplicationController
     @admin.superadmin = false
     if session[:is_admin] == true and @admin.save
       AdminMailer.invite_new_admin(@admin).deliver_now
-      redirect_to admins_path, :notice => "You created admin " + admin_params["name"] + " successfully!"
+      redirect_to admins_path, :success => "You created admin " + admin_params["name"] + " successfully!"
     else
-      render 'new', :notice => "Form is invalid"
+      render 'new', :error => "Form is invalid"
     end
   end
 
@@ -71,7 +71,7 @@ class AdminsController < ApplicationController
   def team_list_email
     AdminMailer.team_list_email(@admin, params[:status] || "All").deliver_later
     
-    flash[:notice] = "Email successfully sent to " + @admin.email
+    flash[:success] = "Email successfully sent to " + @admin.email
 
     redirect_to admins_path
   end
@@ -92,9 +92,11 @@ class AdminsController < ApplicationController
       Team.delete_all
       Submission.delete_all
       Discussion.delete_all
-      redirect_to "/", :notice => "All data reset. Good luck with the new semester!"
+      flash[:success] = "All data reset. Good luck with the new semester!"
+      redirect_to "/"
     else
-      redirect_to reset_semester_path, :notice => "Incorrect password"
+      flash[:error] = "Incorrect password"
+      redirect_to reset_semester_path
     end
   end
       
@@ -105,13 +107,13 @@ class AdminsController < ApplicationController
       other_admin.superadmin = true
       @admin.save!
       other_admin.save!
-      notice = "Successfully transferred superadmin powers."
+      flash[:success] = "Successfully transferred superadmin powers."
     elsif @admin.superadmin == true and params[:transfer_admin] === nil
-      notice = "No admin selected for transfer."
+      flash[:error] = "No admin selected for transfer."
     else
-      notice = "You don't have permission to do that."
+      flash[:error] = "You don't have permission to do that."
     end
-    redirect_to superadmin_path, :notice => notice
+    redirect_to superadmin_path
   end
   
   def delete
@@ -125,24 +127,24 @@ class AdminsController < ApplicationController
       end
       
       if c == 1
-        notice = "#{c} admin successfully deleted."
+        flash[:success] = "#{c} admin successfully deleted."
       else
-        notice = "#{c} admins successfully deleted."
+        flash[:success] = "#{c} admins successfully deleted."
       end
     else
-      notice = "You do not have sufficient permissions to do that."
+      flash[:error] = "You do not have sufficient permissions to do that."
     end
-    redirect_to superadmin_path, :notice => notice
+    redirect_to superadmin_path
   end
   
   def destroy
     if @admin.superadmin == false
       @admin.destroy!
-      notice = "You have successfully deleted your admin account."
+      flash[:success] = "You have successfully deleted your admin account."
     else
-      notice = "Please give someone else superadmin powers before deleting yourself."
+      flash[:alert] = "Please give someone else superadmin powers before deleting yourself."
     end
-    redirect_to '/', :notice => notice
+    redirect_to '/'
   end
 
   
@@ -167,12 +169,12 @@ class AdminsController < ApplicationController
     email = params.require(:email).permit(:subject, :content)
 
     if (email["subject"].length == 0 || email["content"].length == 0)
-      flash[:notice] = "Error: Please fill both of the email's subject and content fields"
+      flash[:error] = "Error: Please fill both of the email's subject and content fields"
       redirect_to admins_path and return
     end
 
     AdminMailer.send_email_to_team(@team_id, @members, email).deliver_now
-    flash[:notice] = "Email successfully sent to team " + @team_id + " (" + @members + ")"
+    flash[:success] = "Email successfully sent to team " + @team_id + " (" + @members + ")"
     redirect_to admins_path
   end
 
@@ -182,7 +184,8 @@ class AdminsController < ApplicationController
 
   def validate_admin
     if !(session[:is_admin])
-      redirect_to '/', :notice => "Permission denied"
+      flash[:error] = "Permission denied"
+      redirect_to '/'
     end
   end
 

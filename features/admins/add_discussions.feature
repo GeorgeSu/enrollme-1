@@ -18,6 +18,7 @@ Feature: admin adds discussion times
     And I select "3:00 PM" from "time"
     And I fill in "capacity" with "20"
     And I press "Add Discussion"
+    Then save the page
     Then I should see "Discussion Sections"
     And I should see "12345 Monday 3:00 PM 20"
   

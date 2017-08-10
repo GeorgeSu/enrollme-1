@@ -23,13 +23,7 @@ class TeamController < ApplicationController
     end
     render "team"
   end
-  
-  def submit
-    EmailStudents.successfully_submitted_email(@team).deliver_now
-    AdminMailer.send_look_at_submission
-    
-    redirect_to new_submission_path
-  end
+
   
   def unsubmit
     @submission = @team.submission
@@ -51,7 +45,8 @@ class TeamController < ApplicationController
 
     @team.withdraw_submission
     return redirect_to without_team_path if @user_to_remove == @user
-    return redirect_to team_path(@team.id), notice: "Removed #{@user_to_remove.name} from team." + notice
+    flash[:success] = "Removed #{@user_to_remove.name} from team." + notice
+    return redirect_to team_path(@team.id)
   end
   
   def list
@@ -116,11 +111,12 @@ class TeamController < ApplicationController
     @users_major_arr = @team.members_majors
     @users_waitlist_arr = @team.members_waitlisteds
     @users_days_arr = @team.members_schedules
+    # byebug
     @users_skills_arr = @team.members_skill_sets
     # @discussions = Discussion.valid_discs_for(@team)
     # if @team.submitted and !(@team.approved)
     #   @s = Submission.find(@team.submission_id)
-    #   @d1 = Discussion.find(@s.disc1id)
+    #   @d1 = Discussion.find(@s.disc1id  
     #   @d2 = Discussion.find_by_id(@s.disc2id)
     #   @d3 = Discussion.find_by_id(@s.disc3id)
     # end
@@ -132,9 +128,13 @@ class TeamController < ApplicationController
       @user = Admin.find(session[:user_id])
     elsif session[:user_id]
       @user = User.find(session[:user_id])
-      redirect_to without_team_path, :notice => "Permission denied: you don't have a team" if @user.team.nil?
+      if @user.team.nil?
+        flash[:alert] = "Permission denied: you don't have a team"
+        redirect_to without_team_path
+      end
     else
-      redirect_to '/', :notice => "Please log in"
+      flash[:notice] = "Please log in"
+      redirect_to '/'
     end
   end
 
@@ -145,12 +145,16 @@ class TeamController < ApplicationController
   def set_permissions
     # checking that the team we are looking for exists and that the user doing the action on the team is either an admin or a student on the same team
     if @team.nil? or (session[:is_admin].nil? and @user.team != @team)
-      redirect_to '/', :notice => "Permission denied: no permission"
+      flash[:error] = "Permission denied"
+      redirect_to '/'
     end
   end
   
   def check_approved
-    redirect_to '/', :notice => "Permission denied: not approved" if @team.approved and !(@user.is_a? Admin)
+    if @team.approved and !(@user.is_a? Admin)
+      flash[:error] = "Permission denied"
+      redirect_to '/'
+    end
   end
 
   def findCompatibleTeams
