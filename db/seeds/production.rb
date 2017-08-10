@@ -71,16 +71,16 @@ for i in 0...users.length
     team1.users << current_user
     team1.update_waitlist
     current_user.team = team1
-    counter += 1
+    counter 
   elsif i < 5
     team2.users << current_user
     team2.update_waitlist
     current_user.team = team2
-    counter += 1
+    counter
   else 
     team3.users << current_user
     team3.update_waitlist
     current_user.team = team3
-    counter += 1
+    counter
   end
 end
