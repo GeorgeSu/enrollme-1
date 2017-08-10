@@ -5,6 +5,7 @@ Feature: admin can view more information about teams
   I want to click on team IDs and User names to check out their information
   
   Background:
+    Given I clean the database
     Given these users exist
      | name  |       email                    |team_passcode | major           | sid  | waitlisted |
      | Sahai | eecs666@hotmail.com            | penguindrool | EECS            | 000  | Yes |
@@ -16,14 +17,17 @@ Feature: admin can view more information about teams
   	 | name  | email                  |
   	 | Bob   | supreme_ruler@aol.com  |
     And the following discussions exist
-   	 | number  | time         |  capacity |
-   	 | 54321   | Tues, 3pm    |  25       |
+  	 | number  | time         |  capacity |
+  	 | 54321   | Tues, 3pm    |  25       |
+  	 | 54322   | Mon, 3pm     |  26       |
+  	 | 54323   | Thur, 3pm    |  27       |
   	And I am on the login page
     And I log in as an admin with email "supreme_ruler@aol.com"
-  	And the team with passcode "penguindrool" is submitted
+  	And the team with passcode "penguindrool" is submitted with discussion numbers "54321", "54322", and "54323"
     And I follow "Pending"
 
   Scenario: An admin accesses a submitted team's page
+    Then save the page
   	Given I follow "1"
   	Then I should see "Team has been submitted!"
   	Then I should see "Selected Discussion Sections"

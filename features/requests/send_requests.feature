@@ -4,7 +4,6 @@ Feature: Manage requests for joining teams
   I want to be able to send requests to teams, and know their decisions
 
   Background: There is a team to join
-    Given I clean the database
     Given these users exist
       |   name    |       email                       | team      | major             | sid               | waitlisted  |
       | Tony      |     tony@berkeley.edu             | passcode7 | Slavic Studies    | 823               | true        |
@@ -50,13 +49,7 @@ Feature: Manage requests for joining teams
   Scenario: I send a join request to a team that is full
     Given I press the "Join Team" button on the same row as "Hezheng"
     Then I should see "cannot accomodate"
-    
-  @javascript
-  Scenario: I should not be able to send a request to my own team
-    Then save the page
-    Given I press the "Join Team" button on the same row as "Derek"
-    Then I should see "own team"
-    
+
   @javascript
   Scenario: I want to cancel an active join request
     Given I press the "Join Team" button on the same row as "An"

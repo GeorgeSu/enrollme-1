@@ -64,9 +64,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update_attributes!(user_params)
-    @user.schedule.update_attributes!(schedule_params)
-    @user.skill_set.update_attributes!(skill_set_params)
+    @user.update_attributes(user_params)
+    @user.schedule.update_attributes(schedule_params)
+    @user.skill_set.update_attributes(skill_set_params)
     
     if @user.team
       @user.team.update_waitlist

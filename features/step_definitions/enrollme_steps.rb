@@ -79,7 +79,7 @@ And /^the team with passcode "([^"]*)" should not be (.*)$/ do | passcode, statu
 end
 
 
-Then /^the "([^"]*)" drop-down should contain the option "([^"]*)"$/ do |dropdown, text|
+Then /^the "([^"]*)" drop-down should contain the option "(.*)"$/ do |dropdown, text|
   expect(page).to have_select(dropdown, :options => [text])
 end
 
@@ -90,10 +90,14 @@ Given /^the following users exist$/ do |table|
     @team = Team.where(:passcode => team_passcode).first
     if team_passcode != "0"
       @team = Team.create(:approved => false, :submitted => false, :passcode => team_passcode, :waitlisted => true) if @team.nil?
-      User.create!(:team => @team, :major => major, :name => name, :email => email, :sid => sid, :waitlisted => true)
+      @user = User.create(:team => @team, :major => major, :name => name, :email => email, :sid => sid, :waitlisted => true)
       @team.update_waitlist
+      schedule = Schedule.create(:user => @user)
+      skill_set = SkillSet.create(:user => @user, :ruby_on_rails => 1, :other_backend => 0, :frontend => 1, :ui_design => 0, :team_management => 1)
     else
-      User.create!(:team => nil, :major => major, :name => name, :email => email, :sid => sid, :waitlisted => true)
+      @user = User.create(:team => nil, :major => major, :name => name, :email => email, :sid => sid, :waitlisted => true)
+      schedule = Schedule.create(:user => @user)
+      skill_set = SkillSet.create(:user => @user, :ruby_on_rails => 1, :other_backend => 0, :frontend => 1, :ui_design => 0, :team_management => 1)
     end
   end
 end
