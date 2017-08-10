@@ -31,14 +31,16 @@ class SessionController < ApplicationController
       end
     else
       session[:user_id] = user.id
-      return redirect_to without_team_path, notice: "Logged in!" if user.team.nil?
-      return redirect_to team_path(user.team), notice: "Logged in!"  
+      return redirect_to without_team_path, success: "Logged in!" if user.team.nil?
+      return redirect_to team_path(user.team), success: "Logged in!"  
     end
   end
   
   def destroy
     session.clear
-    redirect_to login_path, notice: "Logged out!"
+    flash[:notice] = "Logged out!"
+    redirect_to login_path
+    #, notice: "Logged out!"
   end
   
 end
