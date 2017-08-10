@@ -2,16 +2,16 @@
   <title>Requests</title>
     <div class="container">
         <h2>Incoming Requests</h2>
+        <hr class="custom-hr">
 
         <table class="table table-striped table-hover">
-            <% @requests_to_me.each do |incoming_request| %>
+            <% @requests_to_me.each do |incoming_hash| %>
             <tr>
-                <td><%= incoming_request[:text] %></td>
+                <td><%= incoming_hash[:team].getMembers %></td>
                 <div>
-                    <%= 
                 </div>
-                <td><%= link_to "Accept Request", user_request_path(id: incoming_request[:id], decision: "accept"), method: :delete, class: "btn btn-primary btn-sm request_manip" %></td>
-                <td><%= link_to "Deny Request", user_request_path(id: incoming_request[:id], decision: "deny"), method: :delete, class: "btn btn-primary btn-sm request_manip" %></td>
+                <td><%= link_to "Accept Request", user_request_path(id: incoming_hash[:request].id, decision: "accept"), method: :delete, class: "btn btn-primary btn-sm request_manip" %></td>
+                <td><%= link_to "Deny Request", user_request_path(id: incoming_hash[:request].id, decision: "deny"), method: :delete, class: "btn btn-primary btn-sm request_manip" %></td>
             </tr>
             <% end %>
 
@@ -19,13 +19,14 @@
 
 
         <h2>Outgoing Requests</h2>
+        <hr class="custom-hr">
 
         <table class="table table-striped table-hover">
 
-            <% @requests_from_me.each do |outgoing_request| %>
+            <% @requests_from_me.each do |outgoing_hash| %>
             <tr>
-                <td><%= outgoing_request[:text] %></td>
-                <td><%= link_to "Cancel Request", user_request_path(id: outgoing_request[:id], decision: "cancel"), method: :delete, class: "btn btn-primary btn-sm request_manip" %></td>
+                <td><%= outgoing_hash[:team].getMembers %></td>
+                <td><%= link_to "Cancel Request", user_request_path(id: outgoing_hash[:request].id, decision: "cancel"), method: :delete, class: "btn btn-primary btn-sm request_manip" %></td>
             </tr>
             <% end %>
 

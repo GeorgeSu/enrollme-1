@@ -44,11 +44,11 @@ class RequestsController < ApplicationController
     def index
         #requests to me
         reqs_to_me = Request.where(target_id: @team.id)
-        @requests_to_me = (reqs_to_me) ? reqs_to_me.map {|request| Team.find_by(id: request.source_id)} : []
+        @requests_to_me = (reqs_to_me) ? reqs_to_me.map {|request| {team: Team.find_by(id: request.source_id), request: request}} : []
         
         #requests from me or my team
         reqs_from_me = Request.where(source_id: @team.id)
-        @requests_from_me = (reqs_from_me) ? reqs_from_me.map {|request| Team.find_by(id: request.target_id)} : []
+        @requests_from_me = (reqs_from_me) ? reqs_from_me.map {|request| {team: Team.find_by(id: request.target_id), request: request}} : []
     end
 
 
