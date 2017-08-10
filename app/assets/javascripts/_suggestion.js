@@ -1,7 +1,6 @@
 Suggestion = {
     setup: function() {
         $('#prev,#next').click(function (e) {
-            e.preventDefault()
             if (this.id == 'prev') {
                 Suggestion.getPrev();
             }
@@ -32,12 +31,11 @@ Suggestion = {
     },
 
     showDialog: function(data) {
-        $('.item').
+        debugger;
+        $('.item:not(.active)').
         html(data);
-        
-
-$('#input-3').rating({displayOnly: true});
-        return(true);  // resume default link action
+        $('#input-3').rating({displayOnly: true});
+        return(true);
     }
 }
 $(Suggestion.setup);

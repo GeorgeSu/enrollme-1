@@ -58,14 +58,12 @@ class TeamController < ApplicationController
     
     ordering = {:users_count => :desc}
     @teams = Team.order(ordering)
-    rec = get_rec(1)
+    rec = get_rec(0)
     @suggested_team = rec[0]
     @match_score = rec[1]
   end
 
   def next_rec
-    @user = User.find_by(id: session[:user_id])
-    @team = @user.team
     rec = get_rec(1)
     @suggested_team = rec[0]
     @match_score = rec[1]
@@ -75,8 +73,6 @@ class TeamController < ApplicationController
   end
   
   def prev_rec
-    @user = User.find_by(id: session[:user_id])
-    @team = @user.team
     rec = get_rec(-1)
     @suggested_team = rec[0]
     @match_score = rec[1]
@@ -92,9 +88,10 @@ class TeamController < ApplicationController
     matches = @team.sortedMatches
     position = @user[:recommendation_pointer]
     @user[:recommendation_pointer] = (position + direction) % matches.length
+    @user.save
     match_team_id = matches[position][0]
     match_team_score = matches[position][1]
-    @user.save
+    puts(match_team_id)
     return [Team.find_by(id: match_team_id), match_team_score]
   end
 
