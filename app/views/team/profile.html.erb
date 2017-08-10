@@ -2,61 +2,56 @@
 <div class="container">
 <h1>Team <%= @team.id %> Profile</h1>
 <!--<h5>Team ID:  @team.id %></h5>-->
-
-<%
-  enumeration = @team.users.count
-  enumeration <= 3? row = 1 : row = 2
-  for i in 1..row 
-%>
-  <div class = "row equal">
-    <% for j in 0..2 %>
-    <% if enumeration > 0 %>
-    <div class = "col-md-4 card">
-      <h3><%= link_to @users_name_arr.pop(), user_path(@users_id.pop()) %></h3>
-
-      <%= image_tag @users_pic_arr.pop(), :class => "img-responsive img-rounded" %>
-
-      <h5><span class="info_category">Major:&nbsp;</span><%= @users_major_arr.pop() %></h5>
-      <hr class="custom_hr">
-      <h5><span class="info_category">On Waitlist?&nbsp;</span><%= @users_waitlist_arr.pop()? "Yes" : "No" %></h5>
-      <hr class="custom_hr">
-      <h5><span class="info_category">Bio:&nbsp;</span> <%= @users_bio_arr.pop() %></h5>
-      <hr class="custom_hr">
-      <h5><span class="info_category">Time commitment:&nbsp;</span><%= @users_time_arr.pop() %>hrs/wk</h5>
-      <hr class="custom_hr">
-      <h5><span class="info_category">Available days:&nbsp;</span></h5>
-      <% currentDays =  @users_days_arr.pop() %>
-      <label for="sunday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" if !currentDays.include? "Sunday"%>"><%= 'Sun' %></label>
-      <label for="monday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Monday"%>"><%= 'Mon' %></label>
-      <label for="tuesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Tuesday"%>"><%= 'Tue' %></label>
-      <label for="wednesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Wednesday"%>"><%= 'Wed' %></label>
-      <label for="thursday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Thursday"%>"><%= 'Thu' %></label>
-      <label for="friday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Friday"%>"><%= 'Fri' %></label>
-      <label for="saturday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Saturday"%>"><%= 'Sat' %></label>
-      <hr class="custom_hr">
-      <h5><span class="info_category">Experience:&nbsp;</span><%= @users_exp_arr.pop() %></h5>
-      <hr class="custom_hr">
-      <h5><span class="info_category">Skills:&nbsp;</span></h5>
-      <% currentSkills =  @users_skills_arr.pop() %>
-      
-      <% if currentSkills.include? "Ruby" %> <button type="button" class="btn btn-success btn-xs">Ruby On Rails</button> <% end %>
-      <% if currentSkills.include? "Design" %><button type="button" class="btn btn-info btn-xs">Ui Design</button><% end %>
-      <% if currentSkills.include? "Frontend" %><button type="button" class="btn btn-warning btn-xs">Frontend</button><% end %>
-      <% if currentSkills.include? "Backend" %><button type="button" class="btn btn-primary btn-xs">Other Backend</button><% end %>
-      <% if currentSkills.include? "Management" %><button type="button" class="btn btn-danger btn-xs">Team Management</button><% end %>
-      
-      <hr class="custom_hr">
-      <% currentFb =  @users_fb_arr.pop() %>
-      <% if !currentFb.to_s.empty? %> <a href="<%= currentFb %>" target="_black"><i class="fa fa-facebook-square fa-2x" aria-hidden="true" ></i></a><% end %>
-      <% currentLk =  @users_lk_arr.pop() %>
-      <% if !currentLk.to_s.empty? %><a href="<%= currentLk %>" target = "_block"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a><% end %>
-      <% currentEmail =  @users_email_arr.pop() %>
-      <a href="mailto:<%= currentEmail %>"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a> 
-      <hr class="custom_hr">
-    </div>
-    <% enumeration-= 1 
-      end %>
+  
+  <div class="row equal">
+    <% for i in 0..@team.users.count-1 %>
+      <div class = "col-md-4 card">
+        <h3><%= link_to @users_name_arr.pop(), user_path(@users_id.pop()) %></h3>
+  
+        <%= image_tag @users_pic_arr.pop(), :class => "img-responsive img-rounded" %>
+  
+        <h5><span class="info_category">Major:&nbsp;</span><%= @users_major_arr.pop() %></h5>
+        <hr class="custom_hr">
+        <h5><span class="info_category">On Waitlist?&nbsp;</span><%= @users_waitlist_arr.pop()? "Yes" : "No" %></h5>
+        <hr class="custom_hr">
+        <h5><span class="info_category">Bio:&nbsp;</span> <%= @users_bio_arr.pop() %></h5>
+        <hr class="custom_hr">
+        <h5><span class="info_category">Time commitment:&nbsp;</span><%= @users_time_arr.pop() %>hrs/wk</h5>
+        <hr class="custom_hr">
+        <h5><span class="info_category">Available days:&nbsp;</span></h5>
+        
+        <% currentDays =  @users_days_arr.pop() %>
+        <label for="sunday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" if !currentDays.include? "Sunday"%>"><%= 'Sun' %></label>
+        <label for="monday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Monday"%>"><%= 'Mon' %></label>
+        <label for="tuesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Tuesday"%>"><%= 'Tue' %></label>
+        <label for="wednesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Wednesday"%>"><%= 'Wed' %></label>
+        <label for="thursday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Thursday"%>"><%= 'Thu' %></label>
+        <label for="friday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Friday"%>"><%= 'Fri' %></label>
+        <label for="saturday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless currentDays.include? "Saturday"%>"><%= 'Sat' %></label>
+        <hr class="custom_hr">
+        <h5><span class="info_category">Experience:&nbsp;</span><%= @users_exp_arr.pop() %></h5>
+        
+        <hr class="custom_hr">
+        <h5><span class="info_category">Skills:&nbsp;</span></h5>
+        <% currentSkills =  @users_skills_arr.pop() %>
+        
+        <% if currentSkills.include? "Ruby" %> <button type="button" class="btn btn-success btn-xs">Ruby On Rails</button> <% end %>
+        <% if currentSkills.include? "Design" %><button type="button" class="btn btn-info btn-xs">Ui Design</button><% end %>
+        <% if currentSkills.include? "Frontend" %><button type="button" class="btn btn-warning btn-xs">Frontend</button><% end %>
+        <% if currentSkills.include? "Backend" %><button type="button" class="btn btn-primary btn-xs">Other Backend</button><% end %>
+        <% if currentSkills.include? "Management" %><button type="button" class="btn btn-danger btn-xs">Team Management</button><% end %>
+        
+        <hr class="custom_hr" style="margin-top:5px; margin-bottom: 12px ">
+        
+        <% currentFb =  @users_fb_arr.pop() %>
+        <% if !currentFb.to_s.empty? %> <a href="<%= currentFb %>" target="_black"><i class="fa fa-facebook-square fa-2x" aria-hidden="true" ></i></a><% end %>
+        <% currentLk =  @users_lk_arr.pop() %>
+        <% if !currentLk.to_s.empty? %><a href="<%= currentLk %>" target = "_block"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i></a><% end %>
+        <% currentEmail =  @users_email_arr.pop() %>
+        <a href="mailto:<%= currentEmail %>"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a> 
+        <div style="height:20"></div>
+        <!--<br>-->
+      </div>
     <% end %>
   </div>
-  <% end %>
 </div>
