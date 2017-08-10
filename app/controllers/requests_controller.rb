@@ -37,18 +37,18 @@ class RequestsController < ApplicationController
             body = params[:request][:content]
             RequestsMailer.send_notify_emails(@user, target_users, body)
             ######NEEDS TO BE CHANGED TO PREVIOUS PAGE###############
-            redirect_to team_list_path, flash: {alert: "Your request has been sent successfully."}
+            redirect_to team_list_path, flash: {success: "Your request has been sent successfully."}
         end
     end
   
     def index
         #requests to me
         reqs_to_me = Request.where(target_id: @team.id)
-        @requests_to_me = (reqs_to_me) ? reqs_to_me.map {|request| {text: request.showSources, id: request.id}} : []
+        @requests_to_me = (reqs_to_me) ? reqs_to_me.map {|request| {team: Team.find_by(id: request.source_id), request: request}} : []
         
         #requests from me or my team
         reqs_from_me = Request.where(source_id: @team.id)
-        @requests_from_me = (reqs_from_me) ? reqs_from_me.map {|request| {text: request.showTargets, id: request.id}} : []
+        @requests_from_me = (reqs_from_me) ? reqs_from_me.map {|request| {team: Team.find_by(id: request.target_id), request: request}} : []
     end
 
 
@@ -64,7 +64,7 @@ class RequestsController < ApplicationController
         if params[:decision] == "accept"
             if target.getNumMembers + source.getNumMembers > Option.maximum_team_size
                 request.destroy
-                flash[:notice] = "This request is no longer valid"
+                flash[:alert] = "This request is no longer valid"
             else
                 request.join(source, target)
                 request.destroy
@@ -74,6 +74,7 @@ class RequestsController < ApplicationController
             request.destroy
             flash[:notice] = "Request Denied"
         elsif params[:decision] == "cancel"
+            flash[:notice] = "Request Canceled"
             request.destroy
         end
         redirect_to user_requests_path
