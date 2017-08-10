@@ -34,7 +34,9 @@ Suggestion = {
     showDialog: function(data) {
         $('.item').
         html(data);
-        $('#input-3').rating({displayOnly: true});
+        
+
+$('#input-3').rating({displayOnly: true});
         return(true);  // resume default link action
     }
 }
@@ -45,5 +47,4 @@ $(document).ready(function(){
     $('.carousel').carousel({
       interval: false
     })
-    $('#input-3').rating({displayOnly: true, step: 0.5});
   });

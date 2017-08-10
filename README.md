@@ -5,7 +5,7 @@
 
 [![Build Status](https://travis-ci.org/DerekHs/enrollme.svg?branch=master)](https://travis-ci.org/DerekHs/enrollme)
 
-Copyright (c) 2017 Brandon Jabr, Derek Hsiao, Ken Chiu, Hadi Zhang, Karl Hayek, George Su
+Copyright (c) 2017 Derek Hsiao, Ken Chiu, Hadi Zhang, Karl Hayek, George Su, ~~Brandon Jabr~~
 
 ## Goals
 This repository is a continuation of the original project started in Fall 2016. Its purpose is to connect students to each other to form groups in the CS169 class, as well as to streamline enrollment administration.
