@@ -152,15 +152,20 @@ class Team < ActiveRecord::Base
         return teamSkillsVector
     end
 
+    def getTeamAverageTimeCommitment
+        sum = 0
+        self.users.each{|user| sum += user.time_commitment}
+        return sum/(self.users.size)
+    end
+
     def getTeamCompatibility(other_team)
-=begin
-        maxSize = [self.getNumMembers,other_team.getNumMembers].max
-        skillScore = (5*maxSize**2) - (self.getTeamSkillsVector.inner_product other_team.getTeamSkillsVector)
-        schedScore = self.getTeamScheduleVector.inner_product other_team.getTeamScheduleVector
-        finalScore = ::Vector[skillScore,schedScore].normalize.sum / 2
-        return finalScore
-=end
-        return 3
+        skill_factor = (self.getTeamSkillsVector - other_team.getTeamSkillsVector).r
+        schedule_factor = (self.getTeamScheduleVector + other_team.getTeamScheduleVector).max
+        commitment_factor = (self.getTeamAverageTimeCommitment - other_team.getTeamAverageTimeCommitment).abs
+        score = skill_factor*15 + schedule_factor*20 - commitment_factor
+        score = [score, 0].max
+        score = [score, 100].min
+        return score.round(-1)
     end
 
     def getNumMembers # returns the number of members in this group

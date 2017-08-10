@@ -58,29 +58,29 @@ class TeamController < ApplicationController
     
     ordering = {:users_count => :desc}
     @teams = Team.order(ordering)
-    @suggested_team = get_rec(0)
-    @users_pic_arr = @suggested_team.members_pictures
-    @users_name_arr = @suggested_team.members_names
-=begin
-    # The code below is for suggestion
-    @recommended_team = Team.find_by_id(3)
-    @users_pic_arr = @recommended_team.members_pictures_thumb
-=end
+    rec = get_rec(1)
+    @suggested_team = rec[0]
+    @match_score = rec[1]
+
   end
 
   def next_rec
-    @suggested_team = get_rec(1)
-    @users_pic_arr = @suggested_team.members_pictures
-    @users_name_arr = @suggested_team.members_names
+    @user = User.find_by(id: session[:user_id])
+    @team = @user.team
+    rec = get_rec(1)
+    @suggested_team = rec[0]
+    @match_score = rec[1]
     # ajax call to render partial
     render :partial => 'team/pane', :object => @suggested_team and return if request.xhr?
     redirect_to team_list_path
   end
   
   def prev_rec
-    @suggested_team = get_rec(-1)
-    @users_pic_arr = @suggested_team.members_pictures
-    @users_name_arr = @suggested_team.members_names
+    @user = User.find_by(id: session[:user_id])
+    @team = @user.team
+    rec = get_rec(-1)
+    @suggested_team = rec[0]
+    @match_score = rec[1]
     # ajax call to render partial
     render :partial => 'team/pane', :object => @suggested_team and return if request.xhr?
     redirect_to team_list_path
@@ -91,10 +91,12 @@ class TeamController < ApplicationController
     @team = @user.team
     #Get sorted matches, iterate through using pointer, and save pointer
     matches = @team.sortedMatches
-    @user[:recommendation_pointer] = (@user[:recommendation_pointer] + direction) % matches.length
-    match_team_id = matches[@user[:recommendation_pointer]][0]
+    position = @user[:recommendation_pointer]
+    @user[:recommendation_pointer] = (position + direction) % matches.length
+    match_team_id = matches[position][0]
+    match_team_score = matches[position][1]
     @user.save
-    return Team.find_by(id: match_team_id)
+    return [Team.find_by(id: match_team_id), match_team_score]
   end
 
   def profile
@@ -111,7 +113,6 @@ class TeamController < ApplicationController
     @users_major_arr = @team.members_majors
     @users_waitlist_arr = @team.members_waitlisteds
     @users_days_arr = @team.members_schedules
-    # byebug
     @users_skills_arr = @team.members_skill_sets
     # @discussions = Discussion.valid_discs_for(@team)
     # if @team.submitted and !(@team.approved)
