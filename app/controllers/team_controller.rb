@@ -45,7 +45,8 @@ class TeamController < ApplicationController
 
     @team.withdraw_submission
     return redirect_to without_team_path if @user_to_remove == @user
-    return redirect_to team_path(@team.id), notice: "Removed #{@user_to_remove.name} from team." + notice
+    flash[:notice] = "Removed #{@user_to_remove.name} from team." + notice
+    return redirect_to team_path(@team.id)
   end
   
   def list
@@ -126,7 +127,7 @@ class TeamController < ApplicationController
       @user = Admin.find(session[:user_id])
     elsif session[:user_id]
       @user = User.find(session[:user_id])
-      redirect_to without_team_path, :notice => "Permission denied: you don't have a team" if @user.team.nil?
+      redirect_to without_team_path, :alert => "Permission denied: you don't have a team" if @user.team.nil?
     else
       redirect_to '/', :notice => "Please log in"
     end
@@ -139,12 +140,12 @@ class TeamController < ApplicationController
   def set_permissions
     # checking that the team we are looking for exists and that the user doing the action on the team is either an admin or a student on the same team
     if @team.nil? or (session[:is_admin].nil? and @user.team != @team)
-      redirect_to '/', :notice => "Permission denied: no permission"
+      redirect_to '/', :error => "Permission denied: no permission"
     end
   end
   
   def check_approved
-    redirect_to '/', :notice => "Permission denied: not approved" if @team.approved and !(@user.is_a? Admin)
+    redirect_to '/', :error => "Permission denied" if @team.approved and !(@user.is_a? Admin)
   end
 
   def findCompatibleTeams

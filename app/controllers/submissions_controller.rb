@@ -32,7 +32,8 @@ class SubmissionsController < ApplicationController
         EmailStudents.successfully_submitted_email(@team).deliver_now
         AdminMailer.send_look_at_submission
         
-        return redirect_to team_path(@team), notice: "Thanks for submitting your team for enrollment."
+        flash[:success] = "Thanks for submitting your team for enrollment"
+        return redirect_to team_path(@team)
     end
     
     def destroy

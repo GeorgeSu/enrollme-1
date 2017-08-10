@@ -24,13 +24,14 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       session[:user_email] = @user.email
-      # redirect_to without_team_path, :notice => "You signed up successfully!"
+
+      flash[:success] = "You signed up successfully!"
       #Automatically have a team when they sign up.
       start_team
       # send a confirmation email
       EmailStudents.welcome_email(@user).deliver_now
     else
-      render 'new', :notice => "Form is invalid"
+      render 'new', :error => "Form is invalid"
     end
   end
   
@@ -49,7 +50,7 @@ class UsersController < ApplicationController
     @passcode = params[:team_hash]
     @team = Team.find_by_passcode(@passcode)
     @team ||= Team.new()
-    return redirect_to without_team_path, :notice => "Unable to join team" if @passcode.empty? or !(@team.can_join?)
+    return redirect_to without_team_path, :alert => "Unable to join team" if @passcode.empty? or !(@team.can_join?)
     
     @user.leave_team if !(@user.team.nil?)
 
