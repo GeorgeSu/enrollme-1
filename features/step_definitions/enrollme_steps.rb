@@ -198,6 +198,12 @@ Given /^I press the "([^"]*)" button on the same row as "([^"]*)"$/ do |req, nam
     page.find('tr', text: name).click_link(req)
 end
 
+Given /^I press the "([^"]*)" button on the same div as the team with passcode "([^"]*)"$/ do |req, passcode|
+   @team = Team.where(passcode: passcode).first
+   click_link("#{req}[#{@team.id}]")
+end
+
+
 And /^"(.*)" has a team id$/ do |name|
   expect(User.find_by(name: name).team_id.nil?).to be false
 end

@@ -2,56 +2,35 @@
   <title>Requests</title>
     <div class="container">
         <h2>Incoming Requests</h2>
-        <hr class="custom-hr">
-            <% if @requests_to_me.empty? %>
-                <h4> There are no requests to display</h4>
-            <% else %>
-            <% @requests_to_me.each do |incoming_team| %>
-            <div class="row request panel">
-                <div class= "users-container">
-                    <% incoming_team.users.each do |user| %>
-                    <div class = "col-sm-2 col-centered" >
-                        <%= image_tag user.avatar.url(:thumb), class: "img-request img-responsive img-circle" %>
-                        <h4 class = "text-center"><%= user.name %></h4>
-                    </div>
-                    <% end %>
+
+        <table class="table table-striped table-hover">
+            <% @requests_to_me.each do |incoming_request| %>
+            <tr>
+                <td><%= incoming_request[:text] %></td>
+                <div>
+                    <%= 
                 </div>
-                <div class = "btn-requests">
-                    <span>
-                        <%= link_to "Accept Request", user_request_path(id: incoming_team.id, decision: "accept"), method: :delete, id: "accept[#{incoming_team.id}]", class: "btn btn-success btn-sm request_manip" %>
-                        <%= link_to "Deny Request", user_request_path(id: incoming_team.id, decision: "deny"), method: :delete, id: "deny[#{incoming_team.id}]", class: "btn btn-danger btn-sm request_manip" %>
-                    </span>
-                        <%= link_to "View Profile", team_profile_path(id: incoming_team.id), method: :get, class: "btn btn-primary btn-sm request_manip profile_button" %>
-                </div>
-            </div>
-            <% end %>
+                <td><%= link_to "Accept Request", user_request_path(id: incoming_request[:id], decision: "accept"), method: :delete, class: "btn btn-primary btn-sm request_manip" %></td>
+                <td><%= link_to "Deny Request", user_request_path(id: incoming_request[:id], decision: "deny"), method: :delete, class: "btn btn-primary btn-sm request_manip" %></td>
+            </tr>
             <% end %>
 
+        </table>
+
+
         <h2>Outgoing Requests</h2>
-        <hr class="custom-hr">
-            <% if @requests_from_me.empty? %>
-                <h4> There are no requests to display</h4>
-            <% else %>
-            <% @requests_from_me.each do |outgoing_team| %>
-            <div class="row request panel">
-                <div class="users-container">
-                    <% outgoing_team.users.each do |user| %>
-                    <div class = "col-sm-2 col-centered" >
-                        <%= image_tag user.avatar.url(:thumb), class: "img-request img-responsive img-circle"  %>
-                        <h4 class = "text-center"><%= user.name %></h4>
-                    </div>
-                    <% end %>
-                </div>
-                <div class = "btn-requests">
-                    <span>
-                    <%= link_to "Cancel Request", user_request_path(id: outgoing_team.id, decision: "cancel"), method: :delete, id: "cancel[#{outgoing_team.id}]", class: "btn btn-danger btn-sm request_manip" %>    
-                    </span>
-                    <%= link_to "View Profile", team_profile_path(id: outgoing_team.id), method: :get, class: "btn btn-primary btn-sm request_manip profile_button" %>
-                </div>
-            </div>
+
+        <table class="table table-striped table-hover">
+
+            <% @requests_from_me.each do |outgoing_request| %>
+            <tr>
+                <td><%= outgoing_request[:text] %></td>
+                <td><%= link_to "Cancel Request", user_request_path(id: outgoing_request[:id], decision: "cancel"), method: :delete, class: "btn btn-primary btn-sm request_manip" %></td>
+            </tr>
             <% end %>
-            <% end %>
-            
+
+
+        </table>
     </div>
 </body>
 
