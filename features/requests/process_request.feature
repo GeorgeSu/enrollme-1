@@ -136,7 +136,6 @@ Feature: Manage requests for joining teams
         Given there is a request from "Derek" to the team with "Sahai"
         And there is a request from "An" to the team with "Sahai"
         And I follow "Requests"
-        Then save the page
         When I press the "accept" button on the same div as the team with passcode "passcode0"
         And I press the "accept" button on the same div as the team with passcode "passcode9"
         Then I should see "no longer valid"
@@ -153,11 +152,42 @@ Feature: Manage requests for joining teams
         And I press the "Join Team" button on the same row as "Derek"
         When I press "Send"
         And I follow "Requests"
-        Then save the page
         When I press the "accept" button on the same div as the team with passcode "passcode9"
         Then I should not see "Derek"
         When I follow "Home"
         Then I should see "Derek"
         
+    @javascript
+    Scenario: I want to make sure requests to me are being forwarded, but not being forwarded if they are no longer acceptable
+        Given there is a request from "Tony" to the team with "An"
+        Given there is a request from "An" to the team with "Derek"
+        Given there is a request from "Sahai" to the team with "An"
+        When I follow "Requests"
+        When I press the "accept" button on the same div as the team with passcode "passcode0"
+        And I follow "Logout"
+        And I log in as a user with email "tony@berkeley.edu"
+        And I follow "Requests"
+        Then I should see "Derek"
+        And I should see "An"
+        And I follow "Logout"
+        And I log in as a user with email "sahai@berkeley.edu"
+        And I follow "Requests"
+        Then I should not see "Derek"
+        And I should not see "An"
+    
+    @javascript
+    Scenario: I want to make sure requests from me are being forwarded, but not being forwarded to unacceptable teams
+        Given there is a request from "An" to the team with "Derek"
+        And there is a request from "An" to the team with "Tony"
+        And there is a request from "An" to the team with "Sahai"
+        When I follow "Requests"
+        When I press the "accept" button on the same div as the team with passcode "passcode0"
+        Then I should not see "Sahai"
+        And I should see "Tony"
+        And I follow "Logout"
+        And I log in as a user with email "bobjones0@berkeley.edu"
+        And I follow "Requests"
+        Then I should not see "Sahai"
+        And I should see "Tony"
 
       
