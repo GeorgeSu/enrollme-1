@@ -9,8 +9,11 @@
         <%= image_tag @user.avatar.url(:medium) , :class=>"img-rounded img-responsive"%>
         <h4><span class="info_category"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i>&nbsp;</span><a href="mailto:<%= @user.email %>"><%= @user.email %></a> </h4>
         <hr class="custom_hr">
+        <!--Don't show SID if you are not that student-->
+                 <% if @user.id == session[:user_id] %>
         <h4><span class="info_category">SID:&nbsp;</span><%= @user.sid %></h4>
         <hr class="custom_hr">
+                  <% end %>
         <h4><span class="info_category">Major:&nbsp;</span><%= @user.major %></h4>
         <hr class="custom_hr">
         <h4><span class="info_category">On Waitlist?&nbsp;</span><%= @user.waitlisted ? "Yes" : "No" %></h4>
@@ -21,12 +24,22 @@
         <hr class="custom_hr">
         <h4><span class="info_category">Time Commitment:&nbsp;</span><%= @user.time_commitment.nil? ? "None" : @user.time_commitment %></h4>
         <hr class="custom_hr">
-        <h4><span class="info_category">Available Days:&nbsp;</span><%= @availableDays %></h4>
-        <hr class="custom_hr">
+<h4><span class="info_category">Available Days:&nbsp;</span></h4>
+       <label for="sunday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" if !@availableDays.include? "Sunday"%>"><%= 'Sun' %></label>
+       <label for="monday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Monday"%>"><%= 'Mon' %></label>
+       <label for="tuesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Tuesday"%>"><%= 'Tue' %></label>
+       <label for="wednesday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Wednesday"%>"><%= 'Wed' %></label>
+       <label for="thursday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Thursday"%>"><%= 'Thu' %></label>
+       <label for="friday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Friday"%>"><%= 'Fri' %></label>
+       <label for="saturday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" unless @availableDays.include? "Saturday"%>"><%= 'Sat' %></label>        <hr class="custom_hr">
         <h4><span class="info_category">Experience:&nbsp;</span><%= @user.experience.nil? ? "None" : @user.experience %></h4>
         <hr class="custom_hr">
-        <h4><span class="info_category">Skills:&nbsp;</span><%= @skills%></h4>
-        <hr class="custom_hr">
+<h4><span class="info_category">Skills:&nbsp;</span></h4>
+       <% if @skills.include? "Ruby" %> <button type="button" class="btn btn-success btn-xs">Ruby On Rails</button> <% end %>
+       <% if @skills.include? "Design" %><button type="button" class="btn btn-info btn-xs">Ui Design</button><% end %>
+       <% if @skills.include? "Frontend" %><button type="button" class="btn btn-warning btn-xs">Frontend</button><% end %>
+       <% if @skills.include? "Backend" %><button type="button" class="btn btn-primary btn-xs">Other Backend</button><% end %>
+       <% if @skills.include? "Management" %><button type="button" class="btn btn-danger btn-xs">Team Management</button><% end %>        <hr class="custom_hr">
         <h4><span class="info_category"><i class="fa fa-facebook-square fa-2x" aria-hidden="true" ></i>&nbsp;</span><a href="<%= @user.facebook %>" target = "_block"><%= @user.facebook %></a></h4>
         <hr class="custom_hr">
         <h4><span class="info_category"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>&nbsp;</span><a href="<%= @user.linkedin %>" target = "_block"><%= @user.linkedin %></a></h4>
@@ -35,11 +48,13 @@
         <hr class="custom_hr">
 
         <%= link_to "Back", '#', onclick: "history.back()", class: 'btn btn-primary' %>
-        <%= link_to "Edit", edit_user_path(params[:id]), {class: 'btn btn-primary', :method => 'get'} %>
-    </div>
+        <% if @user.id == session[:user_id] %>
+           <%= link_to "Edit", edit_user_path(params[:id]), {class: 'btn btn-primary', :method => 'get'} %>
+         <% end %>    
+         </div>
     <div class="col-sm-8">
       <br>
-            <br>
+      <br>
       <br>
 
     <embed width="100%" height="100%" src="<%= @user.document.url%>" type="application/pdf"></embed>
