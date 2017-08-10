@@ -86,9 +86,10 @@ class TeamController < ApplicationController
     @team = @user.team
     #Get sorted matches, iterate through using pointer, and save pointer
     matches = @team.sortedMatches
-    position = @user[:recommendation_pointer]
-    @user[:recommendation_pointer] = (position + direction) % matches.length
+    @user[:recommendation_pointer] += direction
+    @user[:recommendation_pointer] %= matches.length
     @user.save
+    position = @user[:recommendation_pointer]
     match_team_id = matches[position][0]
     match_team_score = matches[position][1]
     puts(match_team_id)
