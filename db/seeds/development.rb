@@ -7,7 +7,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 admins = [
-    { :name => "Karl Hayek", :email => "karlos9009@gmail.com", :superadmin => false}
+    { :name => "Karl Hayek", :email => "kch05@berkeley.edu", :superadmin => true}
 
 ]
 
