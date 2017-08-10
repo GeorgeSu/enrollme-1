@@ -73,7 +73,7 @@ class TeamController < ApplicationController
     @users_pic_arr = @suggested_team.members_pictures
     @users_name_arr = @suggested_team.members_names
     # ajax call to render partial
-    render :partial => 'suggestion', :object => @suggested_team and return if request.xhr?
+    render :partial => 'team/pane', :object => @suggested_team and return if request.xhr?
     redirect_to team_list_path
   end
   
@@ -82,7 +82,7 @@ class TeamController < ApplicationController
     @users_pic_arr = @suggested_team.members_pictures
     @users_name_arr = @suggested_team.members_names
     # ajax call to render partial
-    render :partial => 'suggestion', :object => @suggested_team and return if request.xhr?
+    render :partial => 'team/pane', :object => @suggested_team and return if request.xhr?
     redirect_to team_list_path
   end
   
