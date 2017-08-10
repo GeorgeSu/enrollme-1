@@ -61,7 +61,6 @@ class TeamController < ApplicationController
     rec = get_rec(1)
     @suggested_team = rec[0]
     @match_score = rec[1]
-
   end
 
   def next_rec
