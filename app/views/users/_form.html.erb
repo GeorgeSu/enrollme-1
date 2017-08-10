@@ -32,15 +32,16 @@
 <div class= "field form-group">
   <%= f.label :"Available days:", class: "col-lg-2 control-label"  %> <br>
   <%= f.fields_for :schedule, @user.schedule do |schedule_field| %>
-      <% days = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday] %>
+      <% days = [ :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday] %>
       <div class="checkbox_container">
         <% days.each do |day| %>
-          <%= schedule_field.label day %>
-          <%= schedule_field.check_box day %>
+          <%= schedule_field.label day,day[0..2].capitalize,:class=>"btn-circle"%>
+          <%= schedule_field.check_box day , :class=>"checks"%>
         <% end %>
       </div>
   <% end %>
-</div>
+  
+
 
 <div class= "field form-group">
   <%= f.label :"Skills:", class: "col-lg-2 control-label"  %> <br>
