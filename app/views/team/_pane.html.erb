@@ -1,17 +1,19 @@
 <div class = "container">
   <div class = "row row-centered">
+    <% names = @suggested_team.members_names %>
+    <% photos = @suggested_team.members_pictures %>
     <% enumeration = @suggested_team.users.count %>
     <% while enumeration > 0 %>
         <div class = "col-sm-2 col-centered" >
-          <%= image_tag @suggested_team.members_pictures.pop(), class: "img-responsive img-circle"  %>
-          <h5 class = "text-center" style = color:black;><%= @users_name_arr.pop() %></h5>
+          <%= image_tag photos.pop(), class: "img-responsive img-circle"  %>
+          <h5 class = "text-center" style = color:black;><%= names.pop() %></h5>
         </div>
         <% enumeration -= 1 %>
     <% end %>
   </div>
 </div>
 <!--<div class="carousel-caption">-->
-<div id="matchDescribtion">
+<div id="matchDescription">
   <div class ="container">
     <div class = "row equal">
 
