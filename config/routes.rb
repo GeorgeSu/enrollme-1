@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
 
   get 'next_rec', to: 'team#next_rec'
+  get 'prev_rec', to: 'team#prev_rec'
 
   resources :admins
   get '/admin/approve_team', to: 'admins#approve'
