@@ -37,7 +37,7 @@ class RequestsController < ApplicationController
             body = params[:request][:content]
             RequestsMailer.send_notify_emails(@user, target_users, body)
             ######NEEDS TO BE CHANGED TO PREVIOUS PAGE###############
-            redirect_to team_list_path, flash: {alert: "Your request has been sent successfully."}
+            redirect_to team_list_path, flash: {success: "Your request has been sent successfully."}
         end
     end
   
@@ -64,7 +64,7 @@ class RequestsController < ApplicationController
         if params[:decision] == "accept"
             if target.getNumMembers + source.getNumMembers > Option.maximum_team_size
                 request.destroy
-                flash[:notice] = "This request is no longer valid"
+                flash[:alert] = "This request is no longer valid"
             else
                 request.join(source, target)
                 request.destroy
@@ -74,6 +74,7 @@ class RequestsController < ApplicationController
             request.destroy
             flash[:notice] = "Request Denied"
         elsif params[:decision] == "cancel"
+            flash[:notice] = "Request Canceled"
             request.destroy
         end
         redirect_to user_requests_path
