@@ -66,13 +66,5 @@ class Request < ActiveRecord::Base
     #Delete the old team 
     source.destroy
   end
-  
-  def showTargets
-    Team.find_by(id: self.target_id).getMembers
-  end
-  
-  def showSources
-    Team.find_by(id: self.source_id).getMembers
-  end
 
 end
