@@ -32,7 +32,7 @@ Suggestion = {
     },
 
     showDialog: function(data) {
-        $('.item').
+        $('.item:not(.active)').
         html(data);
         
 
