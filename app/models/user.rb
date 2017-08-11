@@ -74,10 +74,18 @@ class User < ActiveRecord::Base
 
   def featureVector(attribute)
     case attribute
-    when :skill_set
-      arr = self.skill_set.toArray
-    when :schedule
-      arr = self.schedule.toArray
+      when :skill_set
+        if self.skill_set
+          arr = self.skill_set.toArray
+        else
+          arr = [0, 0, 0 ,0, 0]
+        end
+      when :schedule
+        if self.schedule
+          arr = self.schedule.toArray
+        else
+          arr = [0, 0, 0, 0, 0, 0, 0]
+        end
     else
         raise 'no such feature vector'
     end

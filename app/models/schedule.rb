@@ -3,7 +3,15 @@ class Schedule < ActiveRecord::Base
 
   @@feature_cols = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday]
   def toArray
-    return @@feature_cols.map {|col_name| self[col_name]}
+    arr = []
+    @@feature_cols.each do |col|
+      if self[col]
+        arr.push(1)
+      else
+        arr.push(0)
+      end
+    end
+    return arr
   end
 
   def toString

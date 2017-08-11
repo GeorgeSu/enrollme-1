@@ -26,8 +26,6 @@ Feature: Search Function for Team List
   Scenario: A user searches for a team with a certain member
     Given I fill in "search" with "Jorge"
     Then I should see "Jorge"
-    And I should not see "Bob"
-    And I should not see "Sahai"
     
   # Javascript search should dynamically change table without pressing enter
   Given I fill in "search" with "Bo"

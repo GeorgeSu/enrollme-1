@@ -3,7 +3,15 @@ class SkillSet < ActiveRecord::Base
   belongs_to :user
   @@feature_cols = [:ruby_on_rails, :other_backend, :frontend, :ui_design, :team_management]
   def toArray
-    return @@feature_cols.map {|col_name| self[col_name]}
+    arr = []
+    @@feature_cols.each do |col|
+      if self[col]
+        arr.push(1)
+      else
+        arr.push(0)
+      end
+    end
+    return arr
   end
 
   def toString
