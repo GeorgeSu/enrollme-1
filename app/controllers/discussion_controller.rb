@@ -30,10 +30,10 @@ class DiscussionController < ApplicationController
       render "/discussion/add.html.erb"
    end
    
-   
-   def discussion_params
-      params.require(:discussion).permit(:number, :day, :time, :capacity)
-   end
+   #
+   # def discussion_params
+   #    params.require(:discussion).permit(:number, :day, :time, :capacity)
+   # end
    
    def edit_index
       @discussions = Discussion.all
