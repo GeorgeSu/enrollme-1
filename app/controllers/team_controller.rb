@@ -44,7 +44,9 @@ class TeamController < ApplicationController
     end
 
     @team.withdraw_submission
-    return redirect_to without_team_path if @user_to_remove == @user
+    if @user_to_remove == @user
+      return redirect_to '/'
+    end
     flash[:success] = "Removed #{@user_to_remove.name} from team." + notice
     return redirect_to team_path(@team.id)
   end
