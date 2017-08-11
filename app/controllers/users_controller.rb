@@ -77,8 +77,7 @@ class UsersController < ApplicationController
   end
   
   def index
-
-    @users = @users.order(users_sort)
+    @users = User.order(:name)
   end
 
   private
