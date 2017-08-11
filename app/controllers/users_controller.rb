@@ -77,21 +77,7 @@ class UsersController < ApplicationController
   end
   
   def index
-    sort = params[:users_sort] || session[:users_sort] || 'default'
-    search = params[:search] || session[:search] || ''
-    if sort.include?('in_team?') || sort.include?('team_id')
-      users_sort = 'team_id asc'
-    else
-      users_sort = 'name asc'
-    end
 
-    if search != ''
-      @users = User.where("name LIKE ?", "%#{search}%")
-    else
-      @users = User.all
-    end
-    session[:users_sort] = users_sort
-    session[:search] = search
     @users = @users.order(users_sort)
   end
 
