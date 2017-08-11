@@ -1,6 +1,10 @@
 <title>Team Profile</title>
 <div class="container">
 <h1>Team <%= @team.id %> Profile</h1>
+
+   <% if session[:is_admin] %>
+      <%= link_to "Edit Team", team_path, {method: :get, class: "btn btn-info"} %>
+   <% end %>
 <!--<h5>Team ID:  @team.id %></h5>-->
   
   <div class="row equal">
@@ -18,7 +22,7 @@
         <hr class="custom_hr">
         <h5><span class="info_category">Time commitment:&nbsp;</span><%= @users_time_arr.pop() %>hrs/wk</h5>
         <hr class="custom_hr">
-        <h5><span class="info_category">Available days:&nbsp;</span></h5>
+        <h5><span class="info_category">Available days:&nbsp;</span></h5> 
         
         <% currentDays =  @users_days_arr.pop() %>
         <label for="sunday" class="btn-circle" style="<%= "background-color:#ededed; color:#c6c6c6;" if !currentDays.include? "Sunday"%>"><%= 'Sun' %></label>
