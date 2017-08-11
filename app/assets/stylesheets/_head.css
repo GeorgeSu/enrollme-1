@@ -28,8 +28,8 @@ button.navbar-toggle {
 div.navbar-collapse {
     padding-top: 0 !important;
 }
-li {
-    /*background-color: #18bc9c !important;*/
+.navbar-nav li {
+    background-color: #18bc9c !important;
 }
 
 

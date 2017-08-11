@@ -13,7 +13,7 @@
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
+  width: 300px;
   margin: 2%;
   /*text-align: center;*/
   font-family: arial;
@@ -27,6 +27,11 @@
 .fa{
     margin: -10 5 -10 5;
 }
+.img-rounded {
+    max-width:125px;
+    max-height:125px
+}
+
 
 /*.card > .container {*/
 /*  padding: 0 16px;*/

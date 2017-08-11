@@ -19,8 +19,7 @@ Feature: An admin edits a team
    	 | 54321   | Tues, 3pm    |  25       |
     And I am on the login page
     And I log in as an admin with email "supreme_ruler@aol.com"
-#    And I am on the team "1" page
-    And I follow "1"
+    And I am on the team "1" page
 
   Scenario: An admin successfully removes a user from an unsubmitted team
     Given the team with passcode "penguindrool" is not submitted
