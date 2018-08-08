@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       #Automatically have a team when they sign up.
       start_team
       # send a confirmation email
-      EmailStudents.welcome_email(@user).deliver_now
+      # EmailStudents.welcome_email(@user).deliver_now
     else
       render 'new', :error => "Form is invalid"
     end

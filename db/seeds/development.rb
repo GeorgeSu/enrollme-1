@@ -7,8 +7,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 admins = [
-    { :name => "Karl Hayek", :email => "kch05@berkeley.edu", :superadmin => true}
-
+    { :name => "EnrollMe", :email => "enrollmeberkeley@gmail.com", :superadmin => true},
+    { :name => "Michael-David Sasson", :email => "sasson@berkeley.edu", :superadmin => false},
+    { :name => "George Su", :email => "georgesu1074@gmail.com", :superadmin => false},
+    { :name => "Derek Hsiao", :email => "hsiaoderek@berkeley.edu", :superadmin => false},
+    { :name => "Karl Hayek", :email => "karlos9009@gmail.com", :superadmin => false},
+      { :name => "Ken Chiu", :email => "kenchiu@berkeley.edu", :superadmin => false},
+      { :name => "Hadi Zhang", :email => "hadizhang@gmail.com", :superadmin => true}
 ]
 
 Admin.delete_all
@@ -84,9 +89,33 @@ for i in 0...users.length
     team2.users << current_user
     team2.update_waitlist
     current_user.team = team2
-  else
+  elsif i < 10
     team3.users << current_user
     team3.update_waitlist
     current_user.team = team3
+  elsif i < 14
+    team4.users << current_user
+    team4.update_waitlist
+    current_user.team = team4
+  elsif i < 19
+    team5.users << current_user
+    team5.update_waitlist
+    current_user.team = team5
+  elsif i < 22
+    team6.users << current_user
+    team6.update_waitlist
+    current_user.team = team6
+  elsif i < 25
+    team7.users << current_user
+    team7.update_waitlist
+    current_user.team = team7
+  elsif i < 28
+    team8.users << current_user
+    team8.update_waitlist
+    current_user.team = team8
+  elsif i < 31
+    team9.users << current_user
+    team9.update_waitlist
+    current_user.team = team9
   end
 end
