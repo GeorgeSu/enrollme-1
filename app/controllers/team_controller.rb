@@ -4,7 +4,7 @@ class TeamController < ApplicationController
 
   
   before_filter :set_user, :set_team, :except => ['list', 'profile']
-  before_filter :set_permissions, :except => ['list', 'profile', 'next_rec']
+  before_filter :set_permissions, :except => ['list', 'profile', 'next_rec', 'prev_rec']
   before_filter :check_approved, :only => ['submit', 'unsubmit', 'edit']
   
   # @@suggested_team = Team.first
@@ -23,13 +23,7 @@ class TeamController < ApplicationController
     end
     render "team"
   end
-  
-  def submit
-    EmailStudents.successfully_submitted_email(@team).deliver_now
-    AdminMailer.send_look_at_submission
-    
-    redirect_to new_submission_path
-  end
+
   
   def unsubmit
     @submission = @team.submission
@@ -50,49 +44,59 @@ class TeamController < ApplicationController
     end
 
     @team.withdraw_submission
-    return redirect_to without_team_path if @user_to_remove == @user
-    return redirect_to team_path(@team.id), notice: "Removed #{@user_to_remove.name} from team." + notice
+    if @user_to_remove == @user
+      return redirect_to '/'
+    end
+    flash[:success] = "Removed #{@user_to_remove.name} from team." + notice
+    return redirect_to team_path(@team.id)
   end
   
   def list
+    @user = User.find_by(id: session[:user_id])
+    @team = @user.team
     sort = 'default'
     @waitlist_filter =['true', 'false']
     @num_members_filter = ['1', '2', '3', '4', '5', '6']
     
     ordering = {:users_count => :desc}
     @teams = Team.order(ordering)
-
-    @user = User.find_by(id: session[:user_id])
-    @team = @user.team
-    matches = @team.sortedMatches
-    match_team_id = matches[@user.recommendation_pointer][0]
-    @user.recommendation_pointer = (@user.recommendation_pointer + 1) % matches.length
-    @user.save
-    @suggested_team = Team.find_by(id: match_team_id)
+    @suggested_team = get_rec(0)
     @users_pic_arr = @suggested_team.members_pictures
     @users_name_arr = @suggested_team.members_names
-
+=begin
     # The code below is for suggestion
     @recommended_team = Team.find_by_id(3)
     @users_pic_arr = @recommended_team.members_pictures_thumb
+=end
   end
 
-
   def next_rec
+    @suggested_team = get_rec(1)
+    @users_pic_arr = @suggested_team.members_pictures
+    @users_name_arr = @suggested_team.members_names
     # ajax call to render partial
+    render :partial => 'team/pane', :object => @suggested_team and return if request.xhr?
+    redirect_to team_list_path
+  end
+  
+  def prev_rec
+    @suggested_team = get_rec(-1)
+    @users_pic_arr = @suggested_team.members_pictures
+    @users_name_arr = @suggested_team.members_names
+    # ajax call to render partial
+    render :partial => 'team/pane', :object => @suggested_team and return if request.xhr?
+    redirect_to team_list_path
+  end
+  
+  def get_rec(direction)
     @user = User.find_by(id: session[:user_id])
     @team = @user.team
+    #Get sorted matches, iterate through using pointer, and save pointer
     matches = @team.sortedMatches
-    match_team_id = matches[@user.recommendation_pointer][0]
-    @user.recommendation_pointer = (@user.recommendation_pointer + 1) % matches.length
+    @user[:recommendation_pointer] = (@user[:recommendation_pointer] + direction) % matches.length
+    match_team_id = matches[@user[:recommendation_pointer]][0]
     @user.save
-    @suggested_team = Team.find_by(id: match_team_id)
-    @users_pic_arr = @suggested_team.members_pictures_thumb
-    @users_name_arr = @suggested_team.members_names
-    render :partial => 'suggestion', :object => @suggested_team and return if request.xhr?
-    redirect_to team_list_path
-
-    # The code below is for suggestion
+    return Team.find_by(id: match_team_id)
   end
 
   def profile
@@ -109,11 +113,12 @@ class TeamController < ApplicationController
     @users_major_arr = @team.members_majors
     @users_waitlist_arr = @team.members_waitlisteds
     @users_days_arr = @team.members_schedules
+    # byebug
     @users_skills_arr = @team.members_skill_sets
     # @discussions = Discussion.valid_discs_for(@team)
     # if @team.submitted and !(@team.approved)
     #   @s = Submission.find(@team.submission_id)
-    #   @d1 = Discussion.find(@s.disc1id)
+    #   @d1 = Discussion.find(@s.disc1id  
     #   @d2 = Discussion.find_by_id(@s.disc2id)
     #   @d3 = Discussion.find_by_id(@s.disc3id)
     # end
@@ -125,9 +130,13 @@ class TeamController < ApplicationController
       @user = Admin.find(session[:user_id])
     elsif session[:user_id]
       @user = User.find(session[:user_id])
-      redirect_to without_team_path, :notice => "Permission denied: you don't have a team" if @user.team.nil?
+      if @user.team.nil?
+        flash[:alert] = "Permission denied: you don't have a team"
+        redirect_to without_team_path
+      end
     else
-      redirect_to '/', :notice => "Please log in"
+      flash[:notice] = "Please log in"
+      redirect_to '/'
     end
   end
 
@@ -138,12 +147,16 @@ class TeamController < ApplicationController
   def set_permissions
     # checking that the team we are looking for exists and that the user doing the action on the team is either an admin or a student on the same team
     if @team.nil? or (session[:is_admin].nil? and @user.team != @team)
-      redirect_to '/', :notice => "Permission denied: no permission"
+      flash[:error] = "Permission denied"
+      redirect_to '/'
     end
   end
   
   def check_approved
-    redirect_to '/', :notice => "Permission denied: not approved" if @team.approved and !(@user.is_a? Admin)
+    if @team.approved and !(@user.is_a? Admin)
+      flash[:error] = "Permission denied"
+      redirect_to '/'
+    end
   end
 
   def findCompatibleTeams

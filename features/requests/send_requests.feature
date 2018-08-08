@@ -49,19 +49,14 @@ Feature: Manage requests for joining teams
   Scenario: I send a join request to a team that is full
     Given I press the "Join Team" button on the same row as "Hezheng"
     Then I should see "cannot accomodate"
-    
-  @javascript
-  Scenario: I should not be able to send a request to my own team
-    Given I press the "Join Team" button on the same row as "Derek"
-    Then I should see "own team"
-    
+
   @javascript
   Scenario: I want to cancel an active join request
     Given I press the "Join Team" button on the same row as "An"
     Then I should see "Request message"
     When I press "Send"
     And I follow "Requests"
-    And I press the "Cancel" button on the same row as "An"
+    And I press the "cancel" button on the same div as the team with passcode "passcode0"
     Then I should not see "An"
     
   @javascript
@@ -72,7 +67,7 @@ Feature: Manage requests for joining teams
     And I follow "Logout"
     And I log in as a user with email "bobjones0@berkeley.edu"
     And I follow "Requests"
-    And I press the "Accept" button on the same row as "Derek"
+    And I press the "accept" button on the same div as the team with passcode "passcode9"
     Then I should see "Request Approved"
     And I should not see "Derek"
     And I follow "Logout"
@@ -87,7 +82,7 @@ Feature: Manage requests for joining teams
     And I follow "Logout"
     And I log in as a user with email "bobjones0@berkeley.edu"
     And I follow "Requests"
-    And I press the "Deny Request" button on the same row as "Derek"
+    And I press the "deny" button on the same div as the team with passcode "passcode9"
     Then I should see "Request Denied"
     And I should not see "Derek"
     And I follow "Logout"

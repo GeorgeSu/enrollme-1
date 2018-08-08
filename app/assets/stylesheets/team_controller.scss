@@ -20,12 +20,16 @@
 /** Fancy checkboxes */
 .checkbox_and_label {
     display: inline-block;
+    line-height: 0px;
 }
-.checks {
+
+input[type=checkbox].checks {
     display: block;
     visibility: hidden;
     vertical-align: middle;
-    margin: auto;
+    margin-top: -100px;
+    top: -10%;
+    z-index: -500;
 }
 .btn-circle {
   width: 30px;
@@ -60,8 +64,8 @@
    text-align: center;
 }
 .member_names {
-    width: 35%;
-    min-width: 30%;
+    width: 30%;
+    min-width: 25%;
     max-width: 50%;
 }
 .requests {
@@ -70,7 +74,7 @@
     max-width: 20%;
 }
 .team_waitlisted {
-    width: 15%;
+    width: 10%;
     min-width: 10%;
     max-width: 20%;
 }
@@ -96,4 +100,9 @@
 .info_category {
     font-weight: bold;
     color: #2e5767;
+}
+
+// Team Home
+h5 span {
+    cursor: default;
 }

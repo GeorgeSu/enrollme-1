@@ -8,9 +8,9 @@ Feature: Search Function for Team List
     Given the following users exist
       |   name    |       email                       | team      | major             |       sid         |  waitlisted |
       | Bob       |    bobjones0@berkeley.edu         | passcode1 | Slavic Studies    | 824               | true |
-      | Bob1      |    bobjones1@berkeley.edu         | passcode1 | Slavic Studies    | 825               | true |
+      | Bob1      |    bobjones1@berkeley.edu         | passcode2 | Slavic Studies    | 825               | true |
       | Sahai     |    xxx@berkeley.edu         | passcode2 | Slav1c Studies    | 830               | true |
-      | Saha2     |    xx2@berkeley.edu         | passcode2 | Slav1c Studies    | 831               | true |
+      | Saha2     |    xx2@berkeley.edu         | passcode3 | Slav1c Studies    | 831               | true |
       | Jorge     |    legueoflegends667@hotmail.com  | passcode3 | Football Player   | 999               | true |
     And team "passcode1" has 0 pending requests
     And team "passcode2" has 2 pending requests
@@ -31,6 +31,5 @@ Feature: Search Function for Team List
     
   # Javascript search should dynamically change table without pressing enter
   Given I fill in "search" with "Bo"
-  Then I should see "Bob"
   And I should see "Bob1"
-  And I should not see "Sahai"
+  And I should not see "Saha2"

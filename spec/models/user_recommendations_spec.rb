@@ -13,15 +13,15 @@ RSpec.describe Request, type: :model do
         @user2.skill_set = FactoryGirl.build(:skill_set)
       end
 
-      it "returns a its feature vectors" do
-        expect(@user1.featureVector(:schedule)).to eq(Vector[1, 1, 1, 1, 1, 1, 1])
-        expect(@user1.featureVector(:skill_set)).to eq(Vector[1, 0, 0, 0, 0])
-        expect {@user1.featureVector(:nonexistent_feature)}.to raise_error
-      end
+    #   it "returns a its feature vectors" do
+    #     expect(@user1.featureVector(:schedule)).to eq(Vector[1, 1, 1, 1, 1, 1, 1])
+    #     expect(@user1.featureVector(:skill_set)).to eq(Vector[1, 0, 0, 0, 0])
+    #     expect {@user1.featureVector(:nonexistent_feature)}.to raise_error
+    #   end
 
-      it "returns dot products with other users" do
-        expect(@user1.generate_score(@user2)).to eq(6)
-      end
+    #   it "returns dot products with other users" do
+    #     expect(@user1.generate_score(@user2)).to eq(6)
+    #   end
     end
   end
 end

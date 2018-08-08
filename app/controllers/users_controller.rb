@@ -24,13 +24,14 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       session[:user_email] = @user.email
-      # redirect_to without_team_path, :notice => "You signed up successfully!"
+
+      flash[:success] = "You signed up successfully!"
       #Automatically have a team when they sign up.
       start_team
       # send a confirmation email
       # EmailStudents.welcome_email(@user).deliver_now
     else
-      render 'new', :notice => "Form is invalid"
+      render 'new', :error => "Form is invalid"
     end
   end
   
@@ -49,7 +50,7 @@ class UsersController < ApplicationController
     @passcode = params[:team_hash]
     @team = Team.find_by_passcode(@passcode)
     @team ||= Team.new()
-    return redirect_to without_team_path, :notice => "Unable to join team" if @passcode.empty? or !(@team.can_join?)
+    return redirect_to without_team_path, :alert => "Unable to join team" if @passcode.empty? or !(@team.can_join?)
     
     @user.leave_team if !(@user.team.nil?)
 
@@ -64,7 +65,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update_attributes!(user_params)
+    @user.update_attributes(user_params)
+    @user.schedule.update_attributes(schedule_params)
+    @user.skill_set.update_attributes(skill_set_params)
+    
     if @user.team
       @user.team.update_waitlist
     end
@@ -73,22 +77,7 @@ class UsersController < ApplicationController
   end
   
   def index
-    sort = params[:users_sort] || session[:users_sort] || 'default'
-    search = params[:search] || session[:search] || ''
-    if sort.include?('in_team?') || sort.include?('team_id')
-      users_sort = 'team_id asc'
-    else
-      users_sort = 'name asc'
-    end
-
-    if search != ''
-      @users = User.where("name LIKE ?", "%#{search}%")
-    else
-      @users = User.all
-    end
-    session[:users_sort] = users_sort
-    session[:search] = search
-    @users = @users.order(users_sort)
+    @users = User.order(:name)
   end
 
   private

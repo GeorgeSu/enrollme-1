@@ -52,13 +52,13 @@ Given(/^the team with passcode "([^"]*)" is submitted with discussion numbers "(
   Team.find_by_passcode(passcode).add_submission(s.id)
 end
 
-And /^the team with passcode "([^"]*)" is( not)? submitted$/ do | passcode, negate |
-  if negate
-    Team.find_by_passcode(passcode).update(:submitted => false)
-  else
-    Submission.create!(:disc1id => 1, :disc2id => 1, :disc3id => 1)
-    Team.find_by_passcode(passcode).add_submission(1)
-  end
+And /^the team with passcode "(.*)" is submitted$/ do |passcode|
+  s = Submission.create(:disc1id => 1, :disc2id => 2, :disc3id => 3)
+  Team.find_by(passcode: passcode).add_submission(1)
+end
+
+And /^the team with passcode "(.*)" is (not)? submitted$/ do | passcode, negate |
+  Team.find_by(passcode: passcode).update(:submitted => false)
 end
 
 And /^the team with passcode "([^"]*)" is not approved$/ do | passcode |
@@ -79,7 +79,7 @@ And /^the team with passcode "([^"]*)" should not be (.*)$/ do | passcode, statu
 end
 
 
-Then /^the "([^"]*)" drop-down should contain the option "([^"]*)"$/ do |dropdown, text|
+Then /^the "([^"]*)" drop-down should contain the option "(.*)"$/ do |dropdown, text|
   expect(page).to have_select(dropdown, :options => [text])
 end
 
@@ -90,10 +90,14 @@ Given /^the following users exist$/ do |table|
     @team = Team.where(:passcode => team_passcode).first
     if team_passcode != "0"
       @team = Team.create(:approved => false, :submitted => false, :passcode => team_passcode, :waitlisted => true) if @team.nil?
-      User.create!(:team => @team, :major => major, :name => name, :email => email, :sid => sid, :waitlisted => true)
+      @user = User.create(:team => @team, :major => major, :name => name, :email => email, :sid => sid, :waitlisted => true)
       @team.update_waitlist
+      schedule = Schedule.create(:user => @user)
+      skill_set = SkillSet.create(:user => @user, :ruby_on_rails => 1, :other_backend => 0, :frontend => 1, :ui_design => 0, :team_management => 1)
     else
-      User.create!(:team => nil, :major => major, :name => name, :email => email, :sid => sid, :waitlisted => true)
+      @user = User.create(:team => nil, :major => major, :name => name, :email => email, :sid => sid, :waitlisted => true)
+      schedule = Schedule.create(:user => @user)
+      skill_set = SkillSet.create(:user => @user, :ruby_on_rails => 1, :other_backend => 0, :frontend => 1, :ui_design => 0, :team_management => 1)
     end
   end
 end
@@ -193,6 +197,12 @@ end
 Given /^I press the "([^"]*)" button on the same row as "([^"]*)"$/ do |req, name|
     page.find('tr', text: name).click_link(req)
 end
+
+Given /^I press the "([^"]*)" button on the same div as the team with passcode "([^"]*)"$/ do |req, passcode|
+   @team = Team.where(passcode: passcode).first
+   click_link("#{req}[#{@team.id}]")
+end
+
 
 And /^"(.*)" has a team id$/ do |name|
   expect(User.find_by(name: name).team_id.nil?).to be false

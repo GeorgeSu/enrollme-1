@@ -1,0 +1,37 @@
+<div class = "container">
+  <div class = "row row-centered">
+    <% names = @suggested_team.members_names %>
+    <% photos = @suggested_team.members_pictures %>
+    <% enumeration = @suggested_team.users.count %>
+    <% while enumeration > 0 %>
+        <div class = "col-sm-2 col-centered" >
+          <%= image_tag photos.pop(), class: "img-responsive img-circle"  %>
+          <h5 class = "text-center" style = color:black;><%= names.pop() %></h5>
+        </div>
+        <% enumeration -= 1 %>
+    <% end %>
+  </div>
+</div>
+<!--<div class="carousel-caption">-->
+<div id="matchDescription">
+  <div class ="container">
+    <div class = "row equal">
+
+      <div class = "col-sm-4 leftBlock">
+        <% team_skills = @suggested_team.members_skill_sets.join(" ") %>
+        <% if team_skills.include? "Ruby" %><button type="button" class="btn btn-success btn-xs" id="team_skillss">Ruby On Rails</button> <% end %><br>
+        <% if team_skills.include? "Design" %><button type="button" class="btn btn-info btn-xs" id="team_skillss">Ui Design</button> <% end %><br>
+        <% if team_skills.include? "Frontend" %><button type="button" class="btn btn-warning btn-xs" id="team_skillss">Frontend</button> <% end %><br>
+        <% if team_skills.include? "Other" %><button type="button" class="btn btn-primary btn-xs" id="team_skillss">Other Backend</button> <% end %><br>
+        <% if team_skills.include? "Team" %><button type="button" class="btn btn-danger btn-xs" id="team_skillss">Team Management</button> <% end %>
+      </div>
+
+      <div class = "col-sm-8 rightBlock">
+        <h3>Matching Rate:</h3>
+        <h2><div><span class="stars-container stars-90" >★★★★★</span></h2>
+        <p><a class="btn btn-sm btn-primary" href="<%= team_profile_path(@suggested_team.id) %>" target="_blank">View Team</a>
+          <a class="btn btn-sm btn-primary request" href="<%= new_user_request_path(user_id: session[:user_id], target_id: @suggested_team.id) %>">EnrollMe</a></p>
+      </div>
+    </div>
+  </div>
+</div>

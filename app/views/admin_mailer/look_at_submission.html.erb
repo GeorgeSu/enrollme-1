@@ -10,6 +10,7 @@
           <td>Members</td>
           <td>Status</td>
         </tr>
+       
         <% Team.where("approved = ? AND submitted = ?", false, true).each do |t| %>
           <tr>
             <td><%= t.id %></td>

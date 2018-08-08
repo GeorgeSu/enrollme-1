@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/login_admin', to: 'session#login_admin'
 
   resources :team
-  post 'team/:id/submit', to: 'team#submit', as: "submit_team"
+  # post 'team/:id/submit', to: 'team#submit', as: "submit_team"
   post 'team/:id/unsubmit', to: 'team#unsubmit', as: "unsubmit_team"
   get 'teamlist', to: 'team#list', as: "team_list"
   get 'team/:id/profile', to: 'team#profile', as: 'team_profile'
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
 
   get 'next_rec', to: 'team#next_rec'
+  get 'prev_rec', to: 'team#prev_rec'
 
   resources :admins
   get '/admin/approve_team', to: 'admins#approve'
@@ -56,9 +57,6 @@ Rails.application.routes.draw do
 
   resources :submissions
 
-  resources :requests
-  post 'requests/send_email_to_user', to: 'requests#send_email_to_user', as: "send_email_to_user"
-  get '/requests/email_team', to: 'requests#email_team'
   root 'session#new'
 
 

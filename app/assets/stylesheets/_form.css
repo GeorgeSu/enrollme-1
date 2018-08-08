@@ -1,0 +1,8 @@
+.checkbox_and_label {
+    display: inline-block;
+    line-height: 0px;
+}
+
+#daysChecks{
+    margin:10
+}

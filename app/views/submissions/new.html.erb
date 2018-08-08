@@ -11,23 +11,23 @@
     <div class="container">
         <h1>Choose Discussions</h1>
         <% @team = User.find(session[:user_id]).team %>
+        <br>
         <%= form_for @submission, url: {action: "create"}, class: "form-horizontal" do |f| %>
             <fieldset>
                 <div class="field form-group">
-                    <%= f.label "1st Choice", class: "col-lg-2 control-label" %> <br>
-                    <%= f.collection_select(:disc1id, Discussion.valid_discs_for(@team), :id, :info, {}) %>
+                    <%= f.label "1st Choice", class: "control-label" %>
+                    <%= f.collection_select(:disc1id, Discussion.valid_discs_for(@team), :id, :info, {}, {class: "form-control"}) %>
                 </div>
                 
                 <div class="field form-group">
-                    <%= f.label "2nd Choice", class: "col-lg-2 control-label" %> <br>
-                    <%= f.collection_select(:disc2id, Discussion.valid_discs_for(@team), :id, :info, {}) %>
+                    <%= f.label "2nd Choice", class: "control-label" %>
+                    <%= f.collection_select(:disc2id, Discussion.valid_discs_for(@team), :id, :info, {}, {class: "form-control"}) %>
                 </div>
                 
                 <div class="field form-group">
-                    <%= f.label "3rd Choice", class: "col-lg-2 control-label" %> <br>
-                    <%= f.collection_select(:disc3id, Discussion.valid_discs_for(@team), :id, :info, {}) %>
+                    <%= f.label "3rd Choice", class: "control-label" %>
+                    <%= f.collection_select(:disc3id, Discussion.valid_discs_for(@team), :id, :info, {}, {class: "form-control"}) %>
                 </div>
-                
                 <br>
                 
                 <div class="actions form-group">
@@ -38,3 +38,10 @@
           <% end %>
     </div>
 </body>
+
+
+<style>
+    fieldset {
+        width: 50%;
+    }
+</style>

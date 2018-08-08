@@ -1,11 +1,29 @@
 Suggestion = {
     setup: function() {
-        $(document).on('click', '#next', Suggestion.getDialog)
+        $('#prev,#next').click(function (e) {
+            e.preventDefault()
+            if (this.id == 'prev') {
+                Suggestion.getPrev();
+            }
+            else if (this.id == 'next') {
+                Suggestion.getNext();
+            }
+        })
     },
 
-    getDialog: function() {
+    getNext: function() {
         $.ajax({type: 'GET',
-            url: $(this).attr('href'),
+            url: "next_rec",
+            timeout: 5000,
+            success: Suggestion.showDialog,
+            error: function(jqXHR, textStatus, errorThrown) { alert(jqXHR.textStatus); }
+        });
+        return(false);
+    },
+
+    getPrev: function() {
+        $.ajax({type: 'GET',
+            url: "prev_rec",
             timeout: 5000,
             success: Suggestion.showDialog,
             error: function(jqXHR, textStatus, errorThrown) { alert(jqXHR.textStatus); }
@@ -14,11 +32,13 @@ Suggestion = {
     },
 
     showDialog: function(data) {
-        $('#suggestion').
+        $('.item:not(.active)').
         html(data);
-        // return(false);  // prevent default link action
-    },
+        
 
+$('#input-3').rating({displayOnly: true});
+        return(true);  // resume default link action
+    }
 }
 $(Suggestion.setup);
 
@@ -27,5 +47,4 @@ $(document).ready(function(){
     $('.carousel').carousel({
       interval: false
     })
-    $('#input-3').rating({displayOnly: true, step: 0.5});
   });

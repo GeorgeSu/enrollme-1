@@ -34,32 +34,6 @@ class User < ActiveRecord::Base
     return (self.skill_set.nil?)? "" : self.skill_set.toString
   end
 
-  # def getAvailableDays
-  #   days = {"Sunday" => sunday ,"Monday" => monday,"Tuesday"=>tuesday,"Wednesday"=>wednesday,"Thursday"=>thursday,"Friday"=>friday,"Saturday"=>saturday}
-  #   getStringFromCheckBoxes(days)
-  # end
-  #
-  # def getSkills
-  #   skills = {"Ruby on Rails" => ruby_on_rails, "Other Backend" => other_backend, "Frontend" => frontend, "UI Design" => ui_design, "Team Management" => team_management}
-  #   getStringFromCheckBoxes(skills)
-  # end
-  #
-  # def getStringFromCheckBoxes(hash)
-  #   str = ""
-  #   counter = 0
-  #   hash.each do |key, value|
-  #     if value == 1
-  #       if counter == 0
-  #         str = key
-  #       else
-  #         str = str + ', ' + key
-  #       end
-  #     counter += 1
-  #   end
-  #   end
-  #   # hash.each {|key, value| str = str + key + ", " unless value !=1 }
-  #   str
-  # end
 
   def leave_team
     @team = self.team

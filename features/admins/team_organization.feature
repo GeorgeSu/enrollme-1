@@ -25,9 +25,11 @@ Feature: Use an admin acccount to see organized team data
     And the following discussions exist
   	 | number  | time         |  capacity |
   	 | 54321   | Tues, 3pm    |  25       |
+  	 | 54322   | Mon, 3pm     |  26       |
+  	 | 54323   | Thur, 3pm    |  27       |
     And I am on the login page
     And I log in as an admin with email "supreme_ruler@aol.com"
-    And the team with passcode "penguindrool" is submitted
+    And the team with passcode "penguindrool" is submitted with discussion numbers "54321", "54322", and "54323"
     And the team with passcode "passcode1" is approved with discussion number "54321"
 
  Scenario: A newly disapproved team should not be under the "Approved" category
